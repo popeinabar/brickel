@@ -1,0 +1,142 @@
+/* .info{
+    display: flex;
+} */
+
+
+
+.img-filter{
+    height: 10%;
+    width: 10%;
+    max-width: 25px;
+    min-width: 20px;
+}
+.top{
+    margin-left: 4vw;
+    margin-right: 4vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.image-div{
+height: 213px;
+width:160px;
+min-height: 120px;
+min-width: 160px;
+margin: 2vw;
+overflow: hidden;
+}
+.image-info{
+    /* height: 12%;
+    width:12%; */
+    min-height: 120px;
+    min-width: 160px;
+    max-width: 100%;
+    max-height: 100%;
+   
+    }
+.info{
+    display: flex;
+}
+.flex{
+    display: flex;
+    width: 100vw;
+    justify-content: space-between;
+    margin: 3vw;
+}
+.flex1{
+width: 80%;
+}
+.flex2{
+    width: 100%;
+}
+.mailbtn{
+
+margin-left:  5px; 
+background-color: rgb(0, 0, 0);
+border-radius: 10px;
+height: 45px;
+width: 90px;
+color: rgb(255, 255, 255);
+font-weight: 700;
+font-size: 16px;
+cursor: pointer;
+}
+.flex3{
+    width: fit-content;
+    padding-right: 7vh;
+    height: fit-content;
+    align-self: flex-end;
+
+}
+.flex4{
+    display: flex ;
+}
+.imp2{
+display: none;
+}
+.imp1{
+    display: block;
+}
+.total{
+    border: 1px solid black;
+    border-radius: 20px;
+    box-sizing: border-box;
+    margin: 26px;
+}
+@media (max-width: 800px) {
+    .flex{
+        display: flex;
+        flex-direction: column;
+        width: 100vw;
+        justify-content: center;
+        margin: 10px;
+    }
+    .flex3{
+        align-self: flex-start;
+    }
+    
+}
+@media (max-width: 707px) {
+    .imp2{
+        display: block;
+        margin: 10px;   
+    }
+    .imp1{
+        display: none;
+    }
+    .flex4{
+        display: flex;
+        flex-direction: column;
+    }
+    .mailbtn {
+        margin-left: 50px;
+        background-color: rgb(0, 0, 0);
+        border-radius: 10px;
+        height: 45px;
+        width: 74px;
+        color: rgb(255, 255, 255);
+        font-weight: 700;
+        font-size: 16px;
+        cursor: pointer;
+    }   
+    .flex1 {
+        width: 100%;
+    }
+}
+
+@media (max-width: 414px) {
+.info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.flex{
+    width: 50%;
+    margin: auto;
+    text-align: left;
+    }
+    .flex3{
+        align-self: center;
+        /* padding-left: 34px; */
+    }
+}

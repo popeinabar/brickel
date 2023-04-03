@@ -1,0 +1,25 @@
+.about{
+    background-color: black;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    padding-left: 100px;
+    padding-right: 107px;
+    
+}
+.donate{
+    border: 5px;
+    border-radius: 50%;
+    border-color: white;
+    
+}
+.about-head{
+    color: rgb(0, 136, 255);
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+.about-li{
+    color: white;
+}
