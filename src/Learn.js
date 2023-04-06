@@ -1,12 +1,12 @@
 import React from 'react'
-import Serch from './component/Serch.js'
+import Search from './component/Search.js'
 
 const Learn = () => {
   return (
     <>
         <div>
           
-          <Serch/>
+          <Search/>
         </div>
     </>
   )
