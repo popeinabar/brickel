@@ -16,7 +16,7 @@ const Serch = (props) => {
       {                
         props.any.filter((user)=>{
           
-          if (timing =='' && subject=='' && topic==''){
+          if (timing ==='' && subject==='' && topic===''){
             return user
           }else if(
             user.timing.toLowerCase().includes(timing) && user.subject.toLowerCase().includes(subject) && user.topic.toLowerCase().includes(topic) 

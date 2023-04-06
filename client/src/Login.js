@@ -19,7 +19,7 @@ const Login = () => {
               <input className='log-email' type='text' placeholder='Email'></input>
               <input className='  pass' type='text' placeholder='Password'></input>
 
-              <Link >
+              <Link to={'/form'}>
                   <button className='Register'>
                     Register here
                   </button>
