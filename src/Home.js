@@ -20,7 +20,6 @@ const Home = () => {
   return (
     <>
       <header className='home-header'>
-        <NavBar></NavBar>
         <div className='head-slogan-div'>
           <h3 className='slogan'>Teach something, Learn something</h3>
           <div className='head-info-div'>

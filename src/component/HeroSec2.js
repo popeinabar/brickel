@@ -17,7 +17,7 @@ by teaching others....</p>
 
     <div className='start2-journey'>
     <p>Lets goo...</p>
-    <Link to={'./learn'}>
+    <Link to={'/learn'}>
           <button className='learn-btn' >
     Learn
   </button>
