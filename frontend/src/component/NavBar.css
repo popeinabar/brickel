@@ -1,0 +1,82 @@
+*{
+    padding: 0;
+    
+}
+.logoBlack{
+    top:20px;
+    height: 30px;
+    width: 250px;
+    display: block;
+}
+.logo-small {
+  display: none;
+}
+nav.navbar{
+  width: 90vw;
+}
+.navbar {
+  
+  position:fixed;
+  top: 0;
+    padding-top: 15px;
+    padding-left: 80px;
+    padding-right: 80px;
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
+    background-color: transparent;
+    background-image: linear-gradient(rgb(0, 0, 0), rgba(0, 0, 0, 0));
+    
+}
+a{
+  text-decoration: none;
+
+
+}  
+
+.from-home{
+  color: rgb(255, 255, 255);
+  /* font-family: 'Fjalla One'; */
+  font-weight: 600;
+  font-size: 16px;
+}
+.style{
+  padding-bottom: 10px;
+  padding-top: 10px;
+  padding-left: 20px;
+  padding-right: 10px;
+  border-radius: 10px;
+  }
+
+.style:hover a {
+  transition: 0.4s;
+  color: #351600;
+}
+.navbar-right{
+display:flex;
+margin-top: -10px; 
+width: 23rem;
+}
+
+@media (max-width:684px) {
+  .logo-small {
+    top:20px;
+    width: 21%;
+    height: auto;
+    min-width: 40px;
+    min-height: 30px;
+    display: block;
+  }
+  .logoBlack{
+    
+    
+    display: none;
+}
+.navbar{
+   padding-left: 25px;
+}
+  
+}
+
+ 
+  
