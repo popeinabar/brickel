@@ -1,0 +1,87 @@
+/* Popup container */
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Popup inner container */
+  .popup-inner {
+    background-color: #fff;
+    width: 500px;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  }
+  
+  /* Popup header */
+  .head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  /* Popup title */
+  .head h1 {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0;
+  }
+  
+  /* Popup close button */
+  .button-close {
+    border: none;
+    background-color: transparent;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  /* Popup form */
+  .fil-form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Popup form input labels */
+  .fil-li {
+    list-style: none;
+    margin-bottom: 10px;
+  }
+  
+  /* Popup form inputs */
+  .fil-text,
+  .fil-time {
+    width: 90%;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    margin-top: 5px;
+  }
+  
+  /* Popup form submit button */
+  .smit{
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 20px;
+  }
+  
+  /* Popup form submit button hover */
+  .smit:hover {
+    background-color: #0069d9;
+  }
+  

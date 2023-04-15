@@ -1,0 +1,164 @@
+.home-header{
+background-image: url(./assets/back-nav.jpg);
+/* background-repeat: no-repeat; */
+    
+height: 400px;
+width: 100vw;
+background-size: 100%;
+}
+.home-info{
+    
+    display: flex;
+    /* flex-direction: row-reverse; */
+    justify-content: space-between;
+    margin-top: 47px;
+    margin-bottom: 47px;
+    margin-left: 72px;
+    margin-right: 72px;
+
+   
+}
+.about-btn{
+    margin-left:  25px; 
+    background-color: rgb(0, 0, 0);
+    border-radius: 10px;
+    height: 49px;
+    width: 113px;
+    color: rgb(255, 255, 255);
+    font-weight: 700;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.about-btn:hover {
+    transition: 0.4s;
+    background-color: #351600;
+  }
+  .start-about{
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+    
+  }
+  .home-text{
+    margin: 0px 20px 0px 16px;
+    width: 60%;
+
+  }
+  .teach-btn-head{
+  background-color: rgb(0, 0, 0);
+  border-radius: 10px;
+  height: 45px;
+  width: 108px;
+  color: rgb(255, 255, 255);
+  font-weight: 700;
+  font-size: 16px;
+  cursor: pointer;
+}
+.learn-btn-head:hover{ 
+    transition: 0.4s;
+    background-color: #351600;}
+
+.teach-btn-head:hover{ 
+    transition: 0.4s;
+    background-color: #351600;}
+.learn-btn-head{
+    background-color: rgb(0, 0, 0);
+    border-radius: 10px;
+    height: 45px;
+    width: 108px;
+    color: rgb(255, 255, 255);
+    font-weight: 700;
+    font-size: 16px;
+    cursor: pointer;
+}
+.slogan{
+    color: white;
+    margin-top: 10vh;
+    margin-left: 80px;
+    margin-bottom: 5px;
+}
+.head-info{
+    margin-left: 80px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    color: white;
+    width:50%
+}
+.teach-btn-head{
+    margin-right: 20px;
+    
+}
+
+.head-info-div{
+    display: flex;
+    
+
+}
+.head-slogan-div{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    height: 100%;
+}
+
+
+
+
+@media(max-width:1080px){
+    .home-header{
+        width: 100%;
+        height: 40vh;
+        background-repeat: no-repeat;
+        background-size: 100%;
+        /* 120 */
+    }
+  }
+  @media (max-width: 991px) {
+    
+    .home-info {
+       
+      flex-direction: column;
+      align-items: center;
+      margin: 16px 16px 16px 16px;
+    }
+    .start-about{
+        width: 90%;
+    }
+    .home-text{
+        width: 90%;
+    }
+    .head-info-div{
+        display: flex;
+        flex-direction: column;
+    }
+    .head-button{
+        display: flex;
+        align-self: flex-end;
+        margin-right: 20px;
+    }
+    .head-info {
+        margin-left: 18px;
+    }
+    .slogan{
+        margin-left: 18px;
+    }
+    .head-info{
+        width: 90%;
+    }
+    .home-header{
+        width: 100%;
+        height: 40vh;
+        background-repeat: no-repeat;
+        background-size: 100%;
+    }
+    /* not workingn make it work */ 
+  }
+  @media (max-width: 495px) {
+    .home-header{
+    width: 100%;
+    height: 40vh;
+    background-repeat: no-repeat;
+    background-size: 150%;
+    }
+  }
