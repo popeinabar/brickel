@@ -15,7 +15,7 @@ const About = () => {
   }
   return (
     <>
-      <NavBar/>
+      <NavBar></NavBar>
       <div className='about_div'>
         <HerosSec {...data}/>
         {/* <BetaTesters><BetaTesters> */}
