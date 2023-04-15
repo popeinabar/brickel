@@ -8,6 +8,7 @@ import NavBar from './component/NavBar';
 import User from './User';
 import Login from './Login';
 import Footer from './component/Footer';
+import Form from './Form'
 
 function App() {
   return (
@@ -15,6 +16,8 @@ function App() {
     <>
     <NavBar/>
     <Routes>
+    <Route path='/' element={<Login/>} />//
+    <Route path='/form' element={<Form/>} />//
     <Route path='/home' element={<Home/>} />
     <Route path='/learn' element={<Learn/>} />
     <Route path='/teach' element={<Teach/>} />
