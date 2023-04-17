@@ -53,7 +53,7 @@ function Form() {
       TTopic,
       TTiming,
     };
-    const response = await fetch(process.env.REACT_APP_API_URL,"/api/user", {
+    const response = await fetch(process.env.REACT_APP_API_URL+"/api/user", {
       method: "POST",
       body: JSON.stringify(userData),
       headers: {
