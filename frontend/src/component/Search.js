@@ -91,7 +91,7 @@ const Serch = (props) => {
                 <li className='imp2'>
                                 {props.impression}: {user.impression}
                 </li>
-                `</div>
+                </div>
         )
         })}
     
