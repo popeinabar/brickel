@@ -1,11 +1,13 @@
 import React from 'react'
 import './Form.css'
+import { useSignup } from './hooks/useSignup';
 import { Link } from 'react-router-dom';
 
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 function Form() {
   
 
+  const{signup, isLoading, errors}=useSignup()
   const [Name, setName] = useState('');
   const [DOB, setDob] = useState('');
   const [Occupation, setOccupation] = useState('');
@@ -25,14 +27,20 @@ function Form() {
   
   const [email, setEmail]= useState('')
   const [password, setPassword]= useState('')
+  const [showSignup, setShowSignup] = useState(true);
+
+  const handleSumbitSignup = async(f)=>{
+    f.preventDefault()
+    await signup(email, password);
+    console.log(errors)
+    if (!errors) {
+      // setShowSignup(false);
+    }
 
 
-  const handleSumbitSignup = async(e)=>{
-    e.preventDefault()
-    console.log(email, password)
+    // console.log(email, password)
   }
-//Name,DOB,Occupation,Impression,LSubject,
-// LTopic,LTiming,TSubject,TTopic,TTiming
+
 
   const handleSumbit = async (e) => {
     e.preventDefault();
@@ -63,17 +71,15 @@ function Form() {
       setError(null);
       setIsFormSubmitted(true);
       console.log('new user added');
-      // const response = await fetch('/api/user');
-      // const json = await response.json();
-      // if (response.ok) {
-        // setWorkouts(json);
-      // }
+      
     }
   };
 
   return (
     <>
       <div>
+      
+      {showSignup && (
         <form className='signup' onSubmit={handleSumbitSignup}>
           <div className="popup">
             <div className='popup-inner form-popup'>
@@ -81,20 +87,26 @@ function Form() {
               <label>Email:</label>
               <input
                 type='email'
-                onChange={(e)=> setEmail(e.target.value)}
+                onChange={(f)=> setEmail(f.target.value)}
                 value={email}
-                />
-                <label>Password</label>
-                <input
+              />
+              <label>Password</label>
+              <input
                 type='password'
-                onChange={(e)=> setPassword(e.target.value)}
+                onChange={(f)=> setPassword(f.target.value)}
                 value={password}
-                />
-              <button className="smit redirect" > Register </button>
+              />
+              <button className="smit redirect" disabled={isLoading}> Register </button>
               
+              {errors && <div>{errors}</div>}
             </div>
           </div>
         </form>
+      )}
+      {console.log(errors)}
+    
+  
+
         <form className='user-form' onSubmit={handleSumbit}>
           <h4 className='greeting'> Welcome user😍 Fill in your credentials</h4>
           
