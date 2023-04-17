@@ -11,16 +11,17 @@ const app = express();
 
 //mongoose
 const mongoose = require('mongoose') 
-app.use(
-  cors({
-    origin: [
-      "http://localhost:3000",
-      "https://brickelapp.netlify.app/"
-    ],
-    methods: "GET,POST,PUT,DELETE",
-    credentials: true,
-  })
-)
+// app.use(
+//   cors({
+//     origin: [
+//       "http://localhost:3000",
+//       "https://brickelapp.netlify.app/"
+//     ],
+//     methods: "GET,POST,PUT,DELETE",
+//     credentials: true,
+//   })
+// )
+app.use(cors());
 //middleware
 app.use(express.json()) 
 app.use((req, res, next)=>{
