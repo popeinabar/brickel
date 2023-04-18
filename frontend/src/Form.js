@@ -4,8 +4,10 @@ import { useSignup } from "./hooks/useSignup";
 import { Link } from "react-router-dom";
 
 import { useState } from "react";
+import { useAuthContext } from "./hooks/useAuthContext";
 function Form() {
   const { signup, isLoading, errors } = useSignup();
+  const { user } = useAuthContext()
   const [Name, setName] = useState("");
   const [DOB, setDob] = useState("");
   const [Occupation, setOccupation] = useState("");
@@ -20,6 +22,7 @@ function Form() {
   const [TTiming, setTTiming] = useState("");
 
   const [error, setError] = useState(null);
+  // const [backendError, setBackendError] = useState(null);
 
   const [isFormSubmitted, setIsFormSubmitted] = useState(false);
 
@@ -30,11 +33,14 @@ function Form() {
   const handleSumbitSignup = async (f) => {
     f.preventDefault();
     await signup(email, password);
+    // let backendError = JSON.stringify(errors);
     console.log(errors);
-    if (errors) {
+    if(user === null){
+      setShowSignup(true)
+    }
+    else{
       setShowSignup(false);
     }
-
     // console.log(email, password)
   };
 
@@ -84,7 +90,7 @@ function Form() {
   return (
     <>
       <div>
-        {showSignup && (
+        {showSignup ? (
           <form className="signup" onSubmit={handleSumbitSignup}>
             <div className="popup">
               <div className="popup-inner form-popup">
@@ -105,16 +111,16 @@ function Form() {
                 />
                 <button className="smit redirect" disabled={isLoading}>
                   {" "}
-                  Register{" "}
+                  {user ? "Confirm Register" : "Register"}{" "}
                 </button>
 
                 {errors && <div>{errors}</div>}
               </div>
             </div>
           </form>
-        )}
-        {console.log(errors)}
-
+        ):
+        // {console.log(errors)}
+        
         <form className="user-form" onSubmit={handleSumbit}>
           <h4 className="greeting"> Welcome user😍 Fill in your credentials</h4>
 
@@ -131,56 +137,56 @@ function Form() {
             type="number"
             onChange={(e) => setDob(e.target.value)}
             value={DOB}
-          />
+            />
           <label className="L">Occupation</label>
           <input
             className="user-data"
             type="text"
             onChange={(e) => setOccupation(e.target.value)}
             value={Occupation}
-          />
+            />
           <label className="L"> Impression</label>
           <input
             className="user-data"
             type="text"
             onChange={(e) => setImpression(e.target.value)}
             value={Impression}
-          />
+            />
           <label className="L"> Subject to Learn</label>
           <input
             className="user-data"
             type="text"
             onChange={(e) => setLSubject(e.target.value)}
             value={LSubject}
-          />
+            />
           <label className="L">Topic to Learn</label>
           <input
             className="user-data"
             type="text"
             onChange={(e) => setLTopic(e.target.value)}
             value={LTopic}
-          />
+            />
           <label className="L">Timing to Learn</label>
           <input
             className="user-data"
             type="time"
             onChange={(e) => setLTiming(e.target.value)}
             value={LTiming}
-          />
+            />
           <label className="L"> Subject to Teach</label>
           <input
             className="user-data"
             type="text"
             onChange={(e) => setTSubject(e.target.value)}
             value={TSubject}
-          />
+            />
           <label className="L">Topic to Teach</label>
           <input
             className="user-data"
             type="text"
             onChange={(e) => setTTopic(e.target.value)}
             value={TTopic}
-          />
+            />
           <label className="L">Timing to Teach</label>
           <input
             className="user-data"
@@ -192,6 +198,8 @@ function Form() {
           <button className="addme">Add me</button>
           {error && <div className="error">{error}</div>}
         </form>
+}
+        
         {isFormSubmitted && (
           <div className="popup">
             <div className="popup-inner form-popup">
@@ -209,8 +217,8 @@ function Form() {
               </Link>
             </div>
           </div>
-        )}
-      </div>
+          )}
+          </div>
     </>
   );
 }

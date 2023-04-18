@@ -16,10 +16,10 @@ export const useSignup= ()=>{
         body: JSON.stringify({email, password})    
     })  
     // console.log(Proxy)
-    const json =await response.json()
+    const json = await response.json()
 
     console.log(json)
-    if(!json.ok){
+    if(!response.ok){
         setIsLoading(false)
         setErrors(json.error)//check
     } 
