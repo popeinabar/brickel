@@ -1,7 +1,7 @@
 import React from 'react'
 import './Filters.css'
 //
-import Serch from '../component/Serch'
+import Serch from './Search'
 
 //
 import { useState, createContext } from 'react';

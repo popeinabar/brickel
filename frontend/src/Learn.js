@@ -1,5 +1,5 @@
 import React from 'react'
-import Serch from './component/Serch.js'
+import Serch from './component/Search.js'
 import filter from './assets/filter.png'
 import './Learn.css'
 import Filters from './component/Filters'
@@ -35,7 +35,7 @@ const Learn = () => {
     <>
       <div className='serch'>
         <div className='top'>
-          <h1>Hi, Lerner</h1>
+          <h1>Hi, Learner</h1>
           <img
             className='img-filter'
             onClick={() => setButtonPopup(true)}

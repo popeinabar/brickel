@@ -10,7 +10,7 @@ import Login from './Login';
 import Footer from './component/Footer';
 import Form from './Form'
 
-function App() {
+const App = ()=>{
   return (
 
     <>
@@ -31,3 +31,4 @@ function App() {
 }
 
 export default App;
+  
