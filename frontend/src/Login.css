@@ -27,6 +27,7 @@
 .log-email{
     width: 340px;
     height: 50px;
+    padding-left: 10px;
     border: 2px solid #000000;
     border-radius: 10px;
     font-size: 18px;
@@ -35,7 +36,8 @@
 }
 .pass{
     width: 340px;
-    margin-top: 1vh;
+    padding-left: 10px;
+    margin: 1vh 0vh 1vh 0vh;
     height: 50px;
     border: 2px solid #000000;
     border-radius: 10px;
@@ -43,6 +45,7 @@
     font-weight: bold;
 }
 .Register{
+    cursor: pointer;
     width: 240px;
     height: 40px;
     border: 2px solid #000000;

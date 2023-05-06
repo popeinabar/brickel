@@ -2,12 +2,6 @@
     max-width: 290px; 
     width: 70%;
     height: auto; 
-    /* width: 25%;
-    height: auto; */
-    /* max-width: 70%; */
-    /* min-width: 15%; */
- /* max-height:35vh; */
- /* min-height: 20vh; */
 padding-top: 27px;
 padding-bottom: 27px;
 padding-top:27px ;
@@ -40,7 +34,7 @@ padding-right: 72px;
 }
 .learn-btn{
     border: none;
-    margin-right:  25px; 
+    /* margin-right:  25px;  */
     background-color: rgb(255, 255, 255);
     border-radius: 10px;
     height: 49px;

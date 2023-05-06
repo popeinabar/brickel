@@ -59,19 +59,19 @@ const Serch = (props) => {
                       {props.name}:{" "}{user.Name}
                     </li>
                     <li>
-                      {props.subject}:{" "}{props.isTeaching ? user.TSubject : user.LSubject}
+                      {props.subject}:{" "}{props.isTeaching ? user.LSubject : user.TSubject}
 
                     </li>
                     <li>
                      {props.topic}:{" "}
                     
-                        {props.isTeaching ? user.TTopic : user.LTopic}
+                        {props.isTeaching ? user.LTopic : user.TTopic}
                       
                     </li>
                     <li>
                        {props.timing}:{" "}
                     
-                        {props.isTeaching ? user.TTiming : user.LTiming}{" "}
+                        {props.isTeaching ? user.LTiming : user.TTiming}{" "}
                       
                     </li>
         

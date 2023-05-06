@@ -2,3 +2,14 @@
     margin-top: 47px;
     color: black;
 }
+.loader{
+    height: 200px;
+    width: 200px;
+}
+.loder-div{
+    width: 100vw;
+    height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

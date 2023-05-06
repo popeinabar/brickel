@@ -29,7 +29,7 @@ const Login = () => {
               <h1>LOGIN</h1>
  
               <input className='log-email' type='email' placeholder='Email' onChange={(e)=> setEmail(e.target.value)} value={email}></input>
-              <input className='  pass' type='password' placeholder='Password' onChange={(e)=> setPassword(e.target.value)} value={password}></input>
+              <input className='pass' type='password' placeholder='Password' onChange={(e)=> setPassword(e.target.value)} value={password}></input>
 
               {/* <Link to={'/home'}> */}
                   <button className='Register'>

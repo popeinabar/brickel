@@ -10,7 +10,7 @@ const HerosSec = (props) => {
       <div className='hero-teach'>
         {showStartJourney && (
           <div className='start-journey'>
-            <p>{props.start_journey}</p>
+            <p>{props.start_journey}...</p>
             <Link to={'/teach'}>
               <button className='teach-btn'>
                 Teach

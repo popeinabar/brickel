@@ -61,7 +61,7 @@ width: 23rem;
 @media (max-width:684px) {
   .logo-small {
     top:20px;
-    width: 21%;
+    width: 15%;
     height: auto;
     min-width: 40px;
     min-height: 30px;

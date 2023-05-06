@@ -1,14 +1,7 @@
 
 .teach-img{
     max-width: 290px; 
-    /* width: 70%; */
-    height: auto; 
-    /* width: 25%;
-    height: auto; */
-    /* max-width: 70%; */
-    /* min-width: 15%; */
- /* max-height:35vh; */
- /* min-height: 20vh; */
+    height: auto;
 margin-top: 27px;
 margin-bottom: 27px;
 margin-top:27px ;
@@ -26,7 +19,7 @@ margin-right: 72px;
 .start-journey{
     align-self:  flex-end;
     display: flex;
-    width: 503px;        
+    /* width: 503px;         */
 
 }
 .text{
@@ -38,7 +31,7 @@ margin-right: 72px;
 
 }
 .teach-btn{
-    margin-left:  25px; 
+    margin-right:  5vw; 
     background-color: rgb(0, 0, 0);
     border-radius: 10px;
     height: 49px;
