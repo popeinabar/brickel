@@ -49,7 +49,7 @@ width: 80%;
 .flex2{
     width: 100%;
 }
-.mailbtn{
+.connect{
 
 margin-left:  5px; 
 background-color: rgb(0, 0, 0);
@@ -59,8 +59,12 @@ width: 90px;
 color: rgb(255, 255, 255);
 font-weight: 700;
 font-size: 16px;
+display: flex;
+justify-content: center; /* Center horizontally */
+align-items: center; /* Center vertically */
 cursor: pointer;
 }
+
 .flex3{
     width: fit-content;
     padding-right: 7vh;
@@ -82,6 +86,10 @@ display: none;
     border-radius: 20px;
     box-sizing: border-box;
     margin: 26px;
+}
+
+.span-left{
+    padding-right: 5vw;
 }
 @media (max-width: 800px) {
     .flex{
@@ -137,6 +145,6 @@ display: none;
     }
     .flex3{
         align-self: center;
-        /* padding-left: 34px; */
+        padding-left: 34px;
     }
 }
