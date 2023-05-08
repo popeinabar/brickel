@@ -32,7 +32,7 @@ function Form() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [showSignup, setShowSignup] = useState(false);
+  const [showSignup, setShowSignup] = useState(true);
 
   const handleSumbitSignup = async (f) => {
     f.preventDefault();
@@ -84,6 +84,7 @@ function Form() {
     if (!response.ok) {
       setError(json.error);
     }
+    //setting back to default value
     if (response.ok) {
       setName("");
       setDob("");
@@ -106,6 +107,7 @@ function Form() {
 
   return (
     <>
+    {/* signup form */}
       <div style={{ minHeight: "90vh" }}>
         {showSignup ? (
           <form className="signup" onSubmit={handleSumbitSignup}>
@@ -114,7 +116,7 @@ function Form() {
                 <div className="message">
                   <h3>Register here</h3>
                 </div>
-                {/* <label>Email:</label> */}
+                
                 <TextField id="filled-basic" label="Email" variant="filled" className="validation" 
                 type="email"
                 onChange={(f) => setEmail(f.target.value)}
@@ -135,8 +137,8 @@ function Form() {
             </div>
           </form>
         ) : (
-          // {console.log(errors)}
-
+          
+        //form for fill in user data
           <form className="user-form" onSubmit={handleSumbit}>
             <h4 className="greeting"> Welcome user😍 Fill in your Details</h4>
 
@@ -229,7 +231,7 @@ function Form() {
             {error && <div className="error">{error}</div>}
           </form>
         )}
-
+    {/* submit popup */}
         {isFormSubmitted && (
           <div className="popup">
             <div className="popup-inner form-popup">
@@ -255,6 +257,8 @@ function Form() {
 
 export default Form;
 
+
+//converting image to base 64
 function convertToBase64(file) {
   return new Promise((resolve, reject) => {
     const fileReader = new FileReader();
