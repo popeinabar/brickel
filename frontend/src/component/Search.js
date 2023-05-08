@@ -18,9 +18,9 @@ const Serch = (props) => {
             if (timing === "" && subject === "" && topic === "") {
               return user;
             } else if (
-              user.LTiming.toLowerCase().includes(timing) &&
-              user.LSubject.toLowerCase().includes(subject) &&
-              user.LTopic.toLowerCase().includes(topic)
+              user.TTiming.toLowerCase().includes(timing) &&
+              user.TSubject.toLowerCase().includes(subject) &&
+              user.TTopic.toLowerCase().includes(topic)
             ) {
               return user;
             }
@@ -28,9 +28,9 @@ const Serch = (props) => {
             if (timing === "" && subject === "" && topic === "") {
               return user;
             } else if (
-              user.TTiming.toLowerCase().includes(timing) &&
-              user.TSubject.toLowerCase().includes(subject) &&
-              user.TTopic.toLowerCase().includes(topic)
+              user.LTiming.toLowerCase().includes(timing) &&
+              user.LSubject.toLowerCase().includes(subject) &&
+              user.LTopic.toLowerCase().includes(topic)
             ) {
               return user;
             }

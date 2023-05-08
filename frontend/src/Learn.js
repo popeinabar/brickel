@@ -41,7 +41,7 @@ const Learn = () => {
       <img className="loader" alt='loader' src={loader}/>
     </div>)
     :(
-      <div className='serch'>
+      <div className='serch' style={{ minHeight: "80vh" }}>
         <div className='top'>
           <h1>Hi, Learner</h1>
           <img

@@ -1,14 +1,8 @@
 import React from 'react'
 import './Filters.css'
-//
-import Serch from './Search'
-
-//
 import { useState, createContext } from 'react';
 
 const valuesContext =createContext();
-
-
 const Filters = (props) => {
   const [timing, setTiming] = useState('');
   const [subject, setSubject] = useState('');
@@ -32,7 +26,7 @@ const Filters = (props) => {
   
 
 
-  const {filteredData, setFilteredData} = props;
+  const { setFilteredData} = props;
 
   
   

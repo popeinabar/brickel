@@ -24,6 +24,7 @@ userSchema.statics.signup=async function(email, password){//using this keywordso
     // validation 
     if(!email||!password){
         throw Error('All fiels must be filled')
+        
     }
     const exists= await this.findOne({email})
     if(exists){

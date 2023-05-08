@@ -3,7 +3,6 @@ import "./Form.css";
 import { useSignup } from "./hooks/useSignup";
 import { Link } from "react-router-dom";
 import TextField from '@mui/material/TextField';
-
 import { useState } from "react";
 import { useAuthContext } from "./hooks/useAuthContext";
 function Form() {
@@ -21,8 +20,9 @@ function Form() {
   const [TSubject, setTSubject] = useState("");
   const [TTopic, setTTopic] = useState("");
   const [TTiming, setTTiming] = useState("");
+  
   const [Image, setImage] = useState("");
-  const [displayImage, setDisplayImage] = useState("");
+  const [, setDisplayImage] = useState("");
 
   const [error, setError] = useState(null);
   // const [backendError, setBackendError] = useState(null);
@@ -32,7 +32,7 @@ function Form() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [showSignup, setShowSignup] = useState(true);
+  const [showSignup, setShowSignup] = useState(false);
 
   const handleSumbitSignup = async (f) => {
     f.preventDefault();
@@ -159,8 +159,7 @@ function Form() {
               className="user-data"
               type="file"
               onChange={(e) => handleFileUpload(e)}
-              // value={}
-              accept="image/*"
+              accept="image/*"//
             />
             <label className="L">YOB</label>
             <input

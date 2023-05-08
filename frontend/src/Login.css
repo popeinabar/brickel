@@ -13,6 +13,7 @@
 }
 .moto{
     width: 50vw;
+    height: auto;
     font-size: 18px;
     font-weight: bold;
    text-align: center;
@@ -25,6 +26,7 @@
     
 }
 .log-email{
+    min-width: 200px;
     width: 340px;
     height: 50px;
     padding-left: 10px;
@@ -35,6 +37,7 @@
 
 }
 .pass{
+    min-width: 200px;
     width: 340px;
     padding-left: 10px;
     margin: 1vh 0vh 1vh 0vh;
