@@ -18,9 +18,9 @@ const Serch = (props) => {
             if (timing === "" && subject === "" && topic === "") {
               return user;
             } else if (
-              user.LTiming.toLowerCase().includes(timing) &&
-              user.LSubject.toLowerCase().includes(subject) &&
-              user.LTopic.toLowerCase().includes(topic)
+              user.TTiming.toLowerCase().includes(timing) &&
+              user.TSubject.toLowerCase().includes(subject) &&
+              user.TTopic.toLowerCase().includes(topic)
             ) {
               return user;
             }
@@ -28,9 +28,9 @@ const Serch = (props) => {
             if (timing === "" && subject === "" && topic === "") {
               return user;
             } else if (
-              user.TTiming.toLowerCase().includes(timing) &&
-              user.TSubject.toLowerCase().includes(subject) &&
-              user.TTopic.toLowerCase().includes(topic)
+              user.LTiming.toLowerCase().includes(timing) &&
+              user.LSubject.toLowerCase().includes(subject) &&
+              user.LTopic.toLowerCase().includes(topic)
             ) {
               return user;
             }
@@ -59,19 +59,19 @@ const Serch = (props) => {
                       {props.name}:{" "}{user.Name}
                     </li>
                     <li>
-                      {props.subject}:{" "}{props.isTeaching ? user.TSubject : user.LSubject}
+                      {props.subject}:{" "}{props.isTeaching ? user.LSubject : user.TSubject}
 
                     </li>
                     <li>
                      {props.topic}:{" "}
                     
-                        {props.isTeaching ? user.TTopic : user.LTopic}
+                        {props.isTeaching ? user.LTopic : user.TTopic}
                       
                     </li>
                     <li>
                        {props.timing}:{" "}
                     
-                        {props.isTeaching ? user.TTiming : user.LTiming}{" "}
+                        {props.isTeaching ? user.LTiming : user.TTiming}{" "}
                       
                     </li>
         

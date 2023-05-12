@@ -2,6 +2,32 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import '../component/toggle.css'
 import blk_line from '../assets/black_line3.png'
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Switch from '@mui/material/Switch';
+import Button from '@mui/material/Button';
+import Box from '@mui/material/Box';
+import { alpha, styled } from '@mui/material/styles';
+import { brown } from '@mui/material/colors';
+
+
+
+const BrownSwitch = styled(Switch)(({ theme }) => ({
+  '& .MuiSwitch-switchBase.Mui-checked': {
+    color: brown[600],
+    '&:hover': {
+      backgroundColor: alpha(brown[600], theme.palette.action.hoverOpacity),
+    },
+  },
+  '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
+    backgroundColor: brown[600],
+  },
+}));
+
+const label = { inputProps: { 'aria-label': 'Color switch demo' } };
+
+
+
+
 function ToggleButton() {
 
     function LearnOption(){
@@ -9,11 +35,16 @@ function ToggleButton() {
             <>
                 <div className='toggle'>
                     <div className='style'>
-                    <Link to={'/teach'}>
-              <button className='teach-btn'>
-                Teach
-              </button>
-            </Link>
+                    <Box sx={{ '& button': { m: 1 } }}>
+                        <Link to={'/teach'}>
+                          <Button variant="contained" size="medium"
+                            sx={{
+                              backgroundColor:"black", "&:hover":{backgroundColor:" #351600"}
+                             }}>
+                            Teach
+                          </Button>
+                        </Link>  
+                    </Box>
                    
                     <img
                     className='blk_line'
@@ -44,11 +75,18 @@ function ToggleButton() {
                 <div className='toggle'>
                     <div className='style'>
 
-                    <Link to={'/learn'}>
-                <button className='learn-btn-head'>
-                  Learn
-                </button>
-                    </Link>
+                    <Box sx={{ '& button': { m: 1 } }}>
+                        <Link to={'/learn'}>
+                          <Button variant="contained" size="medium" 
+
+                           sx={{
+                                 backgroundColor:"black", "&:hover":{backgroundColor:" #351600"}
+                              }}>
+                            Learn
+                          </Button>
+                        </Link>  
+                    </Box>
+
                     <img
                     className='blk_line'
                     src={blk_line}
@@ -78,10 +116,9 @@ function ToggleButton() {
   return (
     <div>
     
-    
+    <FormControlLabel control={<BrownSwitch {...label} defaultChecked onClick={handleClick} 
+     /> } label={isOn ? 'As a TEACHER' : 'As a STUDENT'}/>
 
-
-      <button className='toggle-btn' onClick={handleClick}>{isOn ? 'As a TEACHER' : 'As a STUDENT'}</button>
       {isOn ? <LearnOption/> : <TeachOption/>}
     </div>
   );

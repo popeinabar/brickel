@@ -5,11 +5,13 @@ import "./Learn.css";
 import { useState, useEffect } from "react";
 import Filters from "./component/Filters";
 import { useAuthContext } from "./hooks/useAuthContext.js";
+import loader from '../src/assets/loder.gif'
 
 const Teach = () => {
   const { user } = useAuthContext();
   console.log("This is user", user);
   const [buttonPopup, setButtonPopup] = useState(true);
+  const [ loading, setLoading] = useState(true)
 
   const [data, setData] = useState(null); //
 
@@ -23,6 +25,10 @@ const Teach = () => {
       if (response.ok) {
         //
         setData(json); //
+        setTimeout(()=>{
+
+          setLoading(false)
+        }, 2000)
       } //
     }; //
     fetchData(); //
@@ -34,7 +40,11 @@ const Teach = () => {
   });
   return (
     <>
-      <div className="serch">
+    {loading?(<div className="loder-div">
+      <img className="loader" alt="loader" src={loader}/>
+    </div>)
+    :(
+      <div className="serch" style={{ minHeight: "80vh" }}>
         <div className="top">
           <h1>Hi, Tutor</h1>
           <img
@@ -66,6 +76,8 @@ const Teach = () => {
           />
         )}
       </div>
+    )}
+      
     </>
   );
 };

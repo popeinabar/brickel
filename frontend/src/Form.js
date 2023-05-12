@@ -2,7 +2,7 @@ import React from "react";
 import "./Form.css";
 import { useSignup } from "./hooks/useSignup";
 import { Link } from "react-router-dom";
-
+import TextField from '@mui/material/TextField';
 import { useState } from "react";
 import { useAuthContext } from "./hooks/useAuthContext";
 function Form() {
@@ -20,13 +20,15 @@ function Form() {
   const [TSubject, setTSubject] = useState("");
   const [TTopic, setTTopic] = useState("");
   const [TTiming, setTTiming] = useState("");
+  
   const [Image, setImage] = useState("");
-  const [displayImage, setDisplayImage] = useState("");
+  const [, setDisplayImage] = useState("");
 
   const [error, setError] = useState(null);
   // const [backendError, setBackendError] = useState(null);
 
   const [isFormSubmitted, setIsFormSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -53,6 +55,10 @@ function Form() {
   };
   const handleSumbit = async (e) => {
     e.preventDefault();
+    if (isSubmitting) {
+      return; // Form is already being submitted
+    }
+    setIsSubmitting(true);
     const userData = {
       Name,
       DOB,
@@ -78,6 +84,7 @@ function Form() {
     if (!response.ok) {
       setError(json.error);
     }
+    //setting back to default value
     if (response.ok) {
       setName("");
       setDob("");
@@ -95,11 +102,13 @@ function Form() {
       setIsFormSubmitted(true);
       console.log("new user added");
     }
+    setIsSubmitting(false);
   };
 
   return (
     <>
-      <div style={{ minHeight: "80vh" }}>
+    {/* signup form */}
+      <div style={{ minHeight: "90vh" }}>
         {showSignup ? (
           <form className="signup" onSubmit={handleSumbitSignup}>
             <div className="popup">
@@ -107,17 +116,16 @@ function Form() {
                 <div className="message">
                   <h3>Register here</h3>
                 </div>
-                <label>Email:</label>
-                <input
-                  type="email"
-                  onChange={(f) => setEmail(f.target.value)}
-                  value={email}
+                
+                <TextField id="filled-basic" label="Email" variant="filled" className="validation" 
+                type="email"
+                onChange={(f) => setEmail(f.target.value)}
+                value={email}
                 />
-                <label>Password</label>
-                <input
-                  type="password"
-                  onChange={(f) => setPassword(f.target.value)}
-                  value={password}
+                <TextField id="filled-basic" label="Password" variant="filled"  className="validation"
+                 type="password"
+                 onChange={(f) => setPassword(f.target.value)}
+                 value={password}
                 />
                 <button className="smit redirect" disabled={isLoading}>
                   {" "}
@@ -129,8 +137,8 @@ function Form() {
             </div>
           </form>
         ) : (
-          // {console.log(errors)}
-
+          
+        //form for fill in user data
           <form className="user-form" onSubmit={handleSumbit}>
             <h4 className="greeting"> Welcome user😍 Fill in your Details</h4>
 
@@ -153,8 +161,7 @@ function Form() {
               className="user-data"
               type="file"
               onChange={(e) => handleFileUpload(e)}
-              // value={}
-              accept="image/*"
+              accept="image/*"//
             />
             <label className="L">YOB</label>
             <input
@@ -220,11 +227,11 @@ function Form() {
               value={TTiming}
             />
 
-            <button className="addme">Add me</button>
+            <button className="addme" disabled={isSubmitting}>Add me</button>
             {error && <div className="error">{error}</div>}
           </form>
         )}
-
+    {/* submit popup */}
         {isFormSubmitted && (
           <div className="popup">
             <div className="popup-inner form-popup">
@@ -250,6 +257,8 @@ function Form() {
 
 export default Form;
 
+
+//converting image to base 64
 function convertToBase64(file) {
   return new Promise((resolve, reject) => {
     const fileReader = new FileReader();

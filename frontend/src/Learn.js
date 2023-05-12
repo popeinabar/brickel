@@ -4,7 +4,7 @@ import filter from './assets/filter.png'
 import './Learn.css'
 import Filters from './component/Filters'
 import { useState, useEffect } from 'react'
-import data from './component/data'
+import loader from '../src/assets/loder.gif'
 
 const Learn = () => {
   const [buttonPopup, setButtonPopup] = useState(true);
@@ -13,6 +13,7 @@ const Learn = () => {
   topic: "" })
   
   const [data, setData] = useState(null);//
+  const [ loading, setLoading] = useState(true)
 
   useEffect(() => {//
       const fetchData = async () => {//
@@ -21,7 +22,10 @@ const Learn = () => {
   
         if (response.ok) {//
           setData(json);//
-        }//
+          setTimeout(()=>{
+          setLoading(false)
+        }, 2000)
+        }
       };//
       fetchData();//
     }, []);//
@@ -33,7 +37,11 @@ const Learn = () => {
 
 
     <>
-      <div className='serch'>
+    {loading?(<div className="loder-div">
+      <img className="loader" alt='loader' src={loader}/>
+    </div>)
+    :(
+      <div className='serch' style={{ minHeight: "80vh" }}>
         <div className='top'>
           <h1>Hi, Learner</h1>
           <img
@@ -65,6 +73,7 @@ const Learn = () => {
         />
         }
       </div>
+    )}
     </>
   );
 };

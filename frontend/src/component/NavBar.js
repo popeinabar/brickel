@@ -9,8 +9,11 @@ function NavBar() {
 return (
     <nav className='navbar'>
       <div className="navbar-left">
+      <Link  className='from-home' to={'/home'}>
         <img className='logoBlack' src={logo} alt="Logo" />
         <img className='logo-small' src={logo_small} alt="Logo" />
+          
+          </Link>
       </div>
       <div className="navbar-right">
         
