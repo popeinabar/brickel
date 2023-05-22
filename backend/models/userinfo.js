@@ -7,7 +7,7 @@ const userSchema = new Schema(
       required: true,
     },
     DOB: {
-      type: Number,
+      type: Object,
       required: true,
     },
     Occupation: {
@@ -20,11 +20,11 @@ const userSchema = new Schema(
     },
     //Learn
     LSubject: {
-      type: String,
+      type: Array,
       required: true,
     },
     LTopic: {
-      type: String,
+      type: Array,
       required: true,
     },
     LTiming: {
@@ -33,11 +33,11 @@ const userSchema = new Schema(
     },
     //Teach
     TSubject: {
-      type: String,
+      type: Array,
       required: true,
     },
     TTopic: {
-      type: String,
+      type: Array,
       required: true,
     },
     TTiming: {

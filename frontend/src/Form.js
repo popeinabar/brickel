@@ -5,34 +5,51 @@ import { Link } from "react-router-dom";
 import TextField from '@mui/material/TextField';
 import { useState } from "react";
 import { useAuthContext } from "./hooks/useAuthContext";
+import Button from '@mui/material/Button';
+import dayjs from 'dayjs';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { MobileTimePicker } from '@mui/x-date-pickers/MobileTimePicker';
+import Autocomplete from '@mui/material/Autocomplete';
+import Stack from '@mui/material/Stack';
+import { subject } from './data/data';
+import {chapters} from './data/chapter';
+import {years} from './data/year'
+
+
 function Form() {
-  const { signup, isLoading, errors } = useSignup();
+  const [page, setPage]= useState(0);
+
+  const { signup, isLoading, errors } = useSignup();//
   const { user } = useAuthContext();
   const [Name, setName] = useState("");
-  const [DOB, setDob] = useState("");
+  const [DOB, setDob] = useState(null);
+  // console.log(DOB)
   const [Occupation, setOccupation] = useState("");
   const [Impression, setImpression] = useState("");
   const [newEmail, setNewEmail] = useState("");
-  const [LSubject, setLSubject] = useState("");
-  const [LTopic, setLTopic] = useState("");
-  const [LTiming, setLTiming] = useState("");
-
-  const [TSubject, setTSubject] = useState("");
-  const [TTopic, setTTopic] = useState("");
-  const [TTiming, setTTiming] = useState("");
+  const [LSubject, setLSubject] = useState([]);
+  // console.log(LSubject)
+  // console.log(LSubject.map(item => `'${item.subject}'`).join(', '))
+  const [LTopic, setLTopic] = useState([]);
+  const [LTiming, setLTiming] = useState('');
+console.log(LTiming)//value coming from the onchange
+  const [TSubject, setTSubject] = useState([]);
+  const [TTopic, setTTopic] = useState([]);
+  const [TTiming, setTTiming] = useState('');
+  console.log(TTiming)//value coming from onchnage 
   
   const [Image, setImage] = useState("");
-  const [, setDisplayImage] = useState("");
-
+  const [DisplayImage, setDisplayImage] = useState("");
+// console.log(Image)
   const [error, setError] = useState(null);
-  // const [backendError, setBackendError] = useState(null);
 
   const [isFormSubmitted, setIsFormSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [showSignup, setShowSignup] = useState(true);
+  const [showSignup, setShowSignup] = useState(false);
 
   const handleSumbitSignup = async (f) => {
     f.preventDefault();
@@ -43,6 +60,7 @@ function Form() {
       setShowSignup(true);
     } else {
       setShowSignup(false);
+      setPage(page + 1); // Move to the next page
     }
     // console.log(email, password)
   };
@@ -87,75 +105,61 @@ function Form() {
     //setting back to default value
     if (response.ok) {
       setName("");
-      setDob("");
+      setDob(null);
       setOccupation("");
       setImpression("");
-      setLSubject("");
-      setLTopic("");
+      setLSubject([]);
+      setLTopic([]);
       setLTiming("");
-      setTSubject("");
-      setTTopic("");
+      setTSubject([]);
+      setTTopic([]);
       setTTiming("");
       setImage("");
       setError(null);
       setNewEmail("");
       setIsFormSubmitted(true);
       console.log("new user added");
+      setPage(page + 1);
     }
     setIsSubmitting(false);
   };
 
-  return (
-    <>
-    {/* signup form */}
-      <div style={{ minHeight: "90vh" }}>
-        {showSignup ? (
-          <form className="signup" onSubmit={handleSumbitSignup}>
-            <div className="popup">
-              <div className="popup-inner form-popup">
-                <div className="message">
-                  <h3>Register here</h3>
-                </div>
-                
-                <TextField id="filled-basic" label="Email" variant="filled" className="validation" 
-                type="email"
+
+  const FormTitle= ['Sign up', 'User Info','As a Lerner: What would you like to Learn','As a Teacher: What would you like to Teach', 'About you']
+
+
+  const PageDisplay = ()=>{
+    if(page===0){
+        return (
+            <>
+              <form className="signup" onSubmit={handleSumbitSignup}>
+                <TextField id="outlined-basic-email" label="Email" variant="outlined"   type="email"
                 onChange={(f) => setEmail(f.target.value)}
-                value={email}
-                />
-                <TextField id="filled-basic" label="Password" variant="filled"  className="validation"
-                 type="password"
+                value={email}/>
+                <TextField id="outlined-basic-pass" label="Password" variant="outlined"  type="password"
                  onChange={(f) => setPassword(f.target.value)}
-                 value={password}
-                />
+                 value={password} />
                 <button className="smit redirect" disabled={isLoading}>
                   {" "}
                   {user ? "Register Done" : "Register"}{" "}
                 </button>
-
+                {/* <Button variant="contained" disabled={isLoading}>Register</Button> */}
                 {errors && <div>{errors}</div>}
-              </div>
-            </div>
-          </form>
-        ) : (
-          
-        //form for fill in user data
-          <form className="user-form" onSubmit={handleSumbit}>
-            <h4 className="greeting"> Welcome user😍 Fill in your Details</h4>
-
-            <label className="L">Name</label>
-            <input
-              className="user-data"
-              type="text"
-              onChange={(e) => setName(e.target.value)}
-              value={Name}
-            />
-            <label className="L">Email</label>
-            <input
-              className="user-data"
-              type="text"
+              </form>
+            </>
+        )
+    }
+ else if (page===1){
+        return(
+            <>
+              <TextField id="outlined-basic-name" label="Name" variant="outlined"   type="text"
+                onChange={(e) => setName(e.target.value)}
+                value={Name}  />
+              
+              <TextField id="outlined-basic-name" label="email" variant="outlined"   type="text"
               onChange={(e) => setNewEmail(e.target.value)}
-              value={newEmail}
-            />
+              value={newEmail}  />
+
             <label className="L">Image</label>
             <input
               className="user-data"
@@ -163,96 +167,210 @@ function Form() {
               onChange={(e) => handleFileUpload(e)}
               accept="image/*"//
             />
-            <label className="L">YOB</label>
-            <input
-              className="user-data"
-              type="number"
-              onChange={(e) => setDob(e.target.value)}
-              value={DOB}
-            />
-            <label className="L">Occupation</label>
-            <input
-              className="user-data"
-              type="text"
-              onChange={(e) => setOccupation(e.target.value)}
-              value={Occupation}
-            />
-            <label className="L"> Impression</label>
-            <input
-              className="user-data"
-              type="text"
-              onChange={(e) => setImpression(e.target.value)}
-              value={Impression}
-            />
-            <label className="L"> Subject to Learn</label>
-            <input
-              className="user-data"
-              type="text"
-              onChange={(e) => setLSubject(e.target.value)}
-              value={LSubject}
-            />
-            <label className="L">Topic to Learn</label>
-            <input
-              className="user-data"
-              type="text"
-              onChange={(e) => setLTopic(e.target.value)}
-              value={LTopic}
-            />
-            <label className="L">Timing to Learn</label>
-            <input
-              className="user-data"
-              type="time"
-              onChange={(e) => setLTiming(e.target.value)}
-              value={LTiming}
-            />
-            <label className="L"> Subject to Teach</label>
-            <input
-              className="user-data"
-              type="text"
-              onChange={(e) => setTSubject(e.target.value)}
-              value={TSubject}
-            />
-            <label className="L">Topic to Teach</label>
-            <input
-              className="user-data"
-              type="text"
-              onChange={(e) => setTTopic(e.target.value)}
-              value={TTopic}
-            />
-            <label className="L">Timing to Teach</label>
-            <input
-              className="user-data"
-              type="time"
-              onChange={(e) => setTTiming(e.target.value)}
-              value={TTiming}
-            />
+              
+              <Autocomplete
+                  disablePortal
+                  id="combo-box-demo"
+                  options={years}
+                  sx={{ width: 300 }}
+                  getOptionLabel={(option) => option.label}
+                  value={DOB}
+                  onChange={(event, selectedOption) => {
+                    setDob(selectedOption);
+                    console.log(selectedOption?.label);
+                  }}
+                  renderInput={(params) => <TextField {...params} label="Year of birth" />}
+                />
+            </>
+          )
+      }
 
-            <button className="addme" disabled={isSubmitting}>Add me</button>
-            {error && <div className="error">{error}</div>}
-          </form>
-        )}
-    {/* submit popup */}
-        {isFormSubmitted && (
-          <div className="popup">
-            <div className="popup-inner form-popup">
-              <button
-                className="button-close popup-close"
-                onClick={() => setIsFormSubmitted(false)}
-              >
-                Close
-              </button>
-              <div className="message">
-                <h3>Submit successful!</h3>
-              </div>
-              <Link to="/home">
-                <button className="smit redirect"> Home</button>
-              </Link>
-            </div>
+            
+
+
+    else if (page===2){
+        return(
+            <>
+            <Stack spacing={3} sx={{ width: 500 }}>
+      
+                <Autocomplete
+                    multiple
+                    id="tags-outlined-learn"
+                    options={subject}
+                    getOptionLabel={(option) => option.subject}
+                    
+                    filterSelectedOptions
+                    value={LSubject}
+                    onChange={(event, selectedOptions) => {
+                      // Set the selected value using setLSubject
+                      setLSubject(selectedOptions);
+                      // Console log the selected value
+                      // setLSubject(Lsub);
+                      const Lsub=selectedOptions.map((option) => option.subject)
+                      console.log("lern: ",Lsub);
+                    }}
+                    renderInput={(params) => (
+                    <TextField
+                        {...params}
+                        label="Subject to Learn"
+                        placeholder="Subject"
+                    />
+                    )}
+                /> 
+                </Stack>
+                <Stack spacing={3} sx={{ width: 500 }}>
+
+                <Autocomplete
+                    multiple
+                    id="tags-outlined"
+                    options={chapters}
+                    getOptionLabel={(option) => option.Chapter}
+                    filterSelectedOptions
+                    value={LTopic}
+                    onChange={(event, selectedOptions) => {
+                      // Set the selected value using setLTopic
+                      setLTopic(selectedOptions);
+                  
+                      // Console log the selected value
+                      console.log("Llearn: ",selectedOptions.map((option) => option.Chapter));
+                    }}
+                    renderInput={(params) => (
+                        <TextField
+                            {...params}
+                            label="Chapters to Learn"
+                            placeholder="Chapters"
+                        />
+                    )}
+                />
+            </Stack>
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <MobileTimePicker
+                value={LTiming}
+                onChange={(date) => {
+                  const time = dayjs(date).format('HH:mm'); // Extract the time portion
+                  setLTiming(time);
+                console.log(time)
+                }}
+              />
+            </LocalizationProvider>
+            </>
+        )
+    }
+    else if(page===3){
+        return(
+            <>
+                <Stack spacing={3} sx={{ width: 500 }}>
+      
+                <Autocomplete
+                    multiple
+                    id="tags-outlined-learn"
+                    options={subject}
+                    getOptionLabel={(option) => option.subject}
+                    filterSelectedOptions
+                    value={TSubject}
+                    onChange={(event, selectedOptions) => {
+                      // Set the selected value using setTSubject
+                      setTSubject(selectedOptions);
+
+                      // Console log the selected value
+                      console.log("teach:",selectedOptions.map((option) => option.subject));
+                    }}
+                    renderInput={(params) => (
+                      <TextField
+                        {...params}
+                        label="Subject to teach"
+                        placeholder="Subject"
+                      />
+                    )}
+                  />
+
+                </Stack>
+                <Stack spacing={3} sx={{ width: 500 }}>
+      
+                <Autocomplete
+                    multiple
+                    id="tags-outlined-Ttopic"
+                    options={chapters}
+                    getOptionLabel={(option) => option.Chapter}
+                    filterSelectedOptions
+                    value={TTopic}
+                    onChange={(event, selectedOptions) => {
+                      // Set the selected value using setLTopic
+                      setTTopic(selectedOptions);
+                  
+                      // Console log the selected value
+                      console.log("Tlearn: ",selectedOptions.map((option) => option.Chapter));
+                    }}
+                    renderInput={(params) => (
+                        <TextField
+                            {...params}
+                            label="Chapters to teach"
+                            placeholder="Chapters"
+                        />
+                    )}
+                />
+                </Stack>
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <MobileTimePicker
+                value={TTiming}
+                onChange={(date1) => {
+                  const time1 = dayjs(date1).format('HH:mm'); // Extract the time portion
+                  setTTiming(time1);
+                  
+                }}
+              />
+            </LocalizationProvider>
+            </>
+        )
+    }
+    else{
+        return(
+            <>
+                <h3 >
+                    <div>
+                        Impression:
+                        <textarea  className='impress-text input-info' type='text' placeholder='tell us about your self'
+                        onChange={(e) => setOccupation(e.target.value)}
+                        value={Occupation}
+                        ></textarea >
+                    </div>
+                </h3>
+                {/* <Button variant="contained" onClick={handleSumbit}>Submit</Button> */}
+                <button className="addme" disabled={isSubmitting} onClick={handleSumbit}>Add me</button>
+
+            </>
+        )
+    }
+}
+
+
+return (
+  <div className='form'>
+      <div className='progress'>  </div>
+      <div className='form-container'>
+          <div className='header'>
+              <h1>{FormTitle[page]}</h1>
           </div>
-        )}
+          <div className='body'>{PageDisplay()}</div>
+          <div className='footer'>
+              <Button variant="contained" 
+              disabled={page === 1}
+              onClick={()=>{
+                  setPage((currPage)=> currPage-1);
+              }}
+              >previous</Button>
+              <Button variant="contained" 
+              disabled={page === FormTitle.length - 1}
+              onClick={()=>{
+                  setPage((currPage)=> currPage+1);
+              }}
+              >Next</Button>
+          </div>
       </div>
-    </>
-  );
+  </div>
+)
+
+  
 }
 
 export default Form;
