@@ -11,6 +11,7 @@ const Serch = (props) => {
   // console.log(props.filteredData.subject)
   return (
     <>
+    {/* filtering process */}
       {props.any
         .filter((user) => {
           if (props.isTeaching === false) {
@@ -41,7 +42,8 @@ const Serch = (props) => {
             console.log(user);
           }
           return (
-            <div className="total">
+           //conponent
+           <div className="total">
               <div className="info">
                 <div className="image-div">
                   <img
@@ -95,6 +97,7 @@ const Serch = (props) => {
                         className="connect"
                         Connect
                       >
+                        {console.log(user?.Email)}
                         Connect
                       </a>
                     </div>
