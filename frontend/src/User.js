@@ -4,12 +4,13 @@ import pen from './assets/pen_low.png'
 import './User.css'
 import img1 from './assets/img1.jpg'
 import ToggleButton from './component/toggle'
+import { useAuthContext } from './hooks/useAuthContext'
 
 const User = () => {
   const [isEditable, setIsEditable] = useState(true);
   const [isOccuEditable, setIsOccuEditable] = useState(true);
   const [isImpEditable, setIsImpuEditable] = useState(true);
-
+  const {user}= useAuthContext()
 
   const handlePenClick = () => {
     console.log('clicked');
@@ -78,9 +79,13 @@ const User = () => {
                 </h3>
               </div>
             <div className='user-email border' >
+              {user && (
+
+                
               <h3>
-                E-Mail:<input type="text" className='email-input input-info'  readOnly value="ayushphenomal" />
+                E-Mail:<input type="text" className='email-input input-info'  readOnly value={user.user.email} />
               </h3>
+              )}
             </div>
             <div className='user-dob border' >
               <h3>

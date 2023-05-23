@@ -9,7 +9,7 @@ import Box from '@mui/material/Box';
 import { alpha, styled } from '@mui/material/styles';
 import { brown } from '@mui/material/colors';
 import { useLogout } from '../hooks/useLogout';
-
+import { useAuthContext } from '../hooks/useAuthContext'
 
 const BrownSwitch = styled(Switch)(({ theme }) => ({
   '& .MuiSwitch-switchBase.Mui-checked': {
@@ -110,6 +110,7 @@ function ToggleButton() {
 
 
   const [isOn, setIsOn] = useState(false);
+  const {user}= useAuthContext()
 
   const handleClick = () => {
     setIsOn(!isOn);
@@ -124,8 +125,10 @@ function ToggleButton() {
     
     <FormControlLabel control={<BrownSwitch {...label} defaultChecked onClick={handleClick} 
      /> } label={isOn ? 'As a TEACHER' : 'As a STUDENT'}/>
+  {user && (
 
      <button onClick={handleLogout} className='logout'>Log Out</button>
+  )}
 
 
      {/* <button>Update</button> */}
