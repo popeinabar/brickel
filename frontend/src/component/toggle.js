@@ -8,7 +8,7 @@ import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import { alpha, styled } from '@mui/material/styles';
 import { brown } from '@mui/material/colors';
-
+import { useLogout } from '../hooks/useLogout';
 
 
 const BrownSwitch = styled(Switch)(({ theme }) => ({
@@ -21,7 +21,9 @@ const BrownSwitch = styled(Switch)(({ theme }) => ({
   '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
     backgroundColor: brown[600],
   },
-}));
+}
+
+));
 
 const label = { inputProps: { 'aria-label': 'Color switch demo' } };
 
@@ -57,9 +59,9 @@ function ToggleButton() {
                         <h5>Subject:</h5>
                         <h5>topic:</h5>
                     </div>
-                    <div className='toggle-div2'>
+                    {/* <div className='toggle-div2'>
                         <h5>Likes:</h5>
-                    </div>
+                    </div> */}
                     
                 </div>
             </>
@@ -112,14 +114,25 @@ function ToggleButton() {
   const handleClick = () => {
     setIsOn(!isOn);
   };
+  const {logout} = useLogout()
 
+  const handleLogout=()=>{
+    logout()
+  }
   return (
     <div>
     
     <FormControlLabel control={<BrownSwitch {...label} defaultChecked onClick={handleClick} 
      /> } label={isOn ? 'As a TEACHER' : 'As a STUDENT'}/>
 
+     <button onClick={handleLogout} className='logout'>Log Out</button>
+
+
+     {/* <button>Update</button> */}
+
+
       {isOn ? <LearnOption/> : <TeachOption/>}
+
     </div>
   );
 }
