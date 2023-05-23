@@ -4,6 +4,12 @@
     /* align-items: center; */
 
 }
+.logout{
+    border: 2px black;
+    padding: 6px 10px;
+    border-radius: 2px;
+    cursor: pointer;
+}
 .toggle .teach-btn{
     
     align-self: center;
