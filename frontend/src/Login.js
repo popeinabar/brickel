@@ -2,17 +2,20 @@ import React from 'react'
 import './Login.css'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { useLogin } from './hooks/useLogin'
 
 
 const Login = () => {
+  
 
   const [email, setEmail]= useState('')
   const [password, setPassword]= useState('')
+  const {login, errors, isLoading}= useLogin()
 
 
   const handleSumbitLogin= async(e)=>{
     e.preventDefault()
-    console.log(email, password)
+    await login(email, password)
   }
 
 
@@ -32,9 +35,10 @@ const Login = () => {
               <input className='pass' type='password' placeholder='Password' onChange={(e)=> setPassword(e.target.value)} value={password}></input>
 
               {/* <Link to={'/home'}> */}
-                  <button className='Register'>
+                  <button className='Register' disabled={isLoading}>
                     Login
                   </button>
+                  {errors && <div className='error'>{errors}</div>}
               {/* </Link>  */}
  
               <Link to={'/form'}>
@@ -43,6 +47,7 @@ const Login = () => {
                   </button>
               </Link>
             </div>
+
             </form>
           
         </div>
