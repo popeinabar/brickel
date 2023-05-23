@@ -15,6 +15,7 @@ import Stack from '@mui/material/Stack';
 import { subject } from './data/data';
 import {chapters} from './data/chapter';
 import {years} from './data/year'
+import { useEffect } from "react";
 
 
 function Form() {
@@ -28,16 +29,21 @@ function Form() {
   const [Occupation, setOccupation] = useState("");
   const [Impression, setImpression] = useState("");
   const [newEmail, setNewEmail] = useState("");
+  console.log(newEmail)
+  // {user && (
+    
+  //   setNewEmail(user.user.email)
+  //   )}
   const [LSubject, setLSubject] = useState([]);
   // console.log(LSubject)
   // console.log(LSubject.map(item => `'${item.subject}'`).join(', '))
   const [LTopic, setLTopic] = useState([]);
   const [LTiming, setLTiming] = useState('');
-console.log(LTiming)//value coming from the onchange
+// console.log(LTiming)//value coming from the onchange
   const [TSubject, setTSubject] = useState([]);
   const [TTopic, setTTopic] = useState([]);
   const [TTiming, setTTiming] = useState('');
-  console.log(TTiming)//value coming from onchnage 
+  // console.log(TTiming)//value coming from onchnage 
   
   const [Image, setImage] = useState("");
   const [DisplayImage, setDisplayImage] = useState("");
@@ -55,7 +61,7 @@ console.log(LTiming)//value coming from the onchange
     f.preventDefault();
     await signup(email, password);
     // let backendError = JSON.stringify(errors);
-    console.log(errors);
+    // console.log(errors);
     if (user === null) {
       setShowSignup(true);
     } else {
@@ -124,6 +130,15 @@ console.log(LTiming)//value coming from the onchange
     setIsSubmitting(false);
   };
 
+  
+    useEffect(() => {
+      if(user){
+
+        setNewEmail(user.user.email);
+      }
+    }, [user])
+
+  
 
   const FormTitle= ['Sign up', 'User Info','As a Lerner: What would you like to Learn','As a Teacher: What would you like to Teach', 'About you']
 
@@ -149,6 +164,7 @@ console.log(LTiming)//value coming from the onchange
             </>
         )
     }
+    //if user logged in dont show the form by using this {user){)}}
  else if (page===1){
         return(
             <>
@@ -156,9 +172,8 @@ console.log(LTiming)//value coming from the onchange
                 onChange={(e) => setName(e.target.value)}
                 value={Name}  />
               
-              <TextField id="outlined-basic-name" label="email" variant="outlined"   type="text"
-              onChange={(e) => setNewEmail(e.target.value)}
-              value={newEmail}  />
+              <TextField id="outlined-basic-name" label="email" variant="outlined"   type="text" InputProps={{readOnly: true,}}
+              value={user.user.email}  />
 
             <label className="L">Image</label>
             <input
