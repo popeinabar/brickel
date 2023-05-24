@@ -160,44 +160,56 @@ function Form() {
               <div className="signup_form">
 
                 <form className="signup" onSubmit={handleSumbitSignup}>
-                <div className="signup_form_inner">
+                {/* <div className="signup_form_inner"> */}
                   <h1>signup</h1>
                 <Box
                     component="form"
                     sx={{
-                      '& > :not(style)': { m: 1, width: '25ch',},
+                      '& > :not(style)': { m: 1, },
                     }}
                     noValidate
                     autoComplete="off"
                   >
                     <div className="input_fields">
+                    <Stack
+                      component="form"
+                      sx={{
+                        width: '25ch',
+                      }}
+                      spacing={2}
+                      noValidate
+                      autoComplete="off"
+                      >
 
-                  <TextField id="outlined-basic-email" label="Email" variant="outlined"   type="email"
-                  onChange={(f) => setEmail(f.target.value)}
-                  value={email}/>
-                  {/* <FormControl sx={{ m: 1, width: '25ch' }} variant="standard">
-                   <InputLabel htmlFor="standard-adornment-password">Password</InputLabel>
-                      <Input
-                        id="standard-adornment-password"
-                        type={showPassword ? 'text' : 'password'}
-                        onChange={(f) => setPassword(f.target.value)}
-                        value={password}
-                        endAdornment={
-                          <InputAdornment position="end">
-                            <IconButton
-                              aria-label="toggle password visibility"
-                              onClick={handleClickShowPassword}
-                              onMouseDown={handleMouseDownPassword}
-                            >
-                              {showPassword ? <VisibilityOff /> : <Visibility />}
-                            </IconButton>
-                          </InputAdornment>
-                        }
-                        />
-                      </FormControl> */}
-                  <TextField id="outlined-basic-pass" className="pass_field" label="Password" variant="outlined"  type="password"
-                  onChange={(f) => setPassword(f.target.value)}
-                  value={password} />
+                          <TextField id="outlined-basic-email" label="Email" variant="outlined"   type="email"
+                          onChange={(f) => setEmail(f.target.value)}
+                          value={email}/>
+                          {/* <FormControl sx={{ m: 1, width: '25ch' }} variant="standard">
+                          <InputLabel htmlFor="standard-adornment-password">Password</InputLabel>
+                              <Input
+                                id="standard-adornment-password"
+                                type={showPassword ? 'text' : 'password'}
+                                onChange={(f) => setPassword(f.target.value)}
+                                value={password}
+                                endAdornment={
+                                  <InputAdornment position="end">
+                                    <IconButton
+                                      aria-label="toggle password visibility"
+                                      onClick={handleClickShowPassword}
+                                      onMouseDown={handleMouseDownPassword}
+                                    >
+                                      {showPassword ? <VisibilityOff /> : <Visibility />}
+                                    </IconButton>
+                                  </InputAdornment>
+                                }
+                                />
+                              </FormControl> */}
+                          <TextField id="outlined-basic-pass" className="pass_field" label="Password" variant="outlined"  type="password"
+                          onChange={(f) => setPassword(f.target.value)}
+                          value={password} />
+
+                    </Stack>
+
                     
                     </div>
                     
@@ -211,7 +223,7 @@ function Form() {
                   {errors && <div>{errors}</div>}
 
                 </div>
-                </div>
+                {/* </div> */}
                 </form>
 
 
@@ -223,21 +235,38 @@ function Form() {
  else if (page===1){
         return(
             <>
+            <div className="user_form">
+              <div className="user_form_inner">
+
               <h1>User info</h1>
-              <TextField id="outlined-basic-name" label="Name" variant="outlined"   type="text"
+              <Stack
+                component="form"
+                sx={{
+                  width: '25ch',
+                }}
+                spacing={2}
+                noValidate
+                autoComplete="off"
+              >
+
+              <TextField id="outlined-basic-name" label="Name" variant="filled"   type="text"
                 onChange={(e) => setName(e.target.value)}
                 value={Name}  />
               
-              <TextField id="outlined-basic-name" label="email" variant="outlined"   type="text" InputProps={{readOnly: true,}}
+              <TextField id="outlined-basic-name" label="email" variant="filled"   type="text" InputProps={{readOnly: true,}}
               value={user.user.email}  />
 
-            <label className="L">Image</label>
-            <input
-              className="user-data"
-              type="file"
-              onChange={(e) => handleFileUpload(e)}
-              accept="image/*"//
-            />
+              </Stack>
+              <div className="user-data">
+                
+                <label className="L">Image: </label>
+                <input
+                 
+                  type="file"
+                  onChange={(e) => handleFileUpload(e)}
+                  accept="image/*"//
+                />
+              </div>      
               
               <Autocomplete
                   disablePortal
@@ -250,8 +279,12 @@ function Form() {
                     setDob(selectedOption);
                     console.log(selectedOption?.label);
                   }}
-                  renderInput={(params) => <TextField {...params} label="Year of birth" />}
+                  renderInput={(params) => <TextField {...params} variant='filled' label="Year of birth" />}
                 />
+
+              </div>
+
+            </div>
             </>
           )
       }
@@ -262,8 +295,12 @@ function Form() {
     else if (page===2){
         return(
             <>
+            <div className="learn_form">
+
+            <div className="learn_form_inner">
+
             <h1>As a Lerner: What would you like to Learn</h1>
-            <Stack spacing={3} sx={{ width: 500 }}>
+            <Stack spacing={3}>
       
                 <Autocomplete
                     multiple
@@ -283,6 +320,7 @@ function Form() {
                     renderInput={(params) => (
                     <TextField
                         {...params}
+                        variant='filled'
                         label="Subject to Learn"
                         placeholder="Subject"
                     />
@@ -307,12 +345,12 @@ function Form() {
                     renderInput={(params) => (
                         <TextField
                             {...params}
+                            variant='filled'
                             label="Chapters to Learn"
                             placeholder="Chapters"
                         />
                     )}
                 />
-              </Stack>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <MobileTimePicker
                 value={LTiming}
@@ -323,14 +361,23 @@ function Form() {
                 }}
                 />
             </LocalizationProvider>
+              </Stack>
+
+            </div>
+
+            </div>
             </>
         )
     }
     else if(page===3){
         return(
             <>
+            <div className="learn_form">
+
+            <div className="learn_form_inner">
+
             <h1>As a Teacher: What would you like to Teach</h1>
-                <Stack spacing={3} sx={{ width: 500 }}>
+                <Stack spacing={3}>
       
                 <Autocomplete
                     multiple
@@ -349,6 +396,7 @@ function Form() {
                     renderInput={(params) => (
                       <TextField
                         {...params}
+                        variant='filled'
                         label="Subject to teach"
                         placeholder="Subject"
                       />
@@ -372,12 +420,12 @@ function Form() {
                     renderInput={(params) => (
                         <TextField
                             {...params}
+                            variant='filled'
                             label="Chapters to teach"
                             placeholder="Chapters"
                         />
                     )}
                 />
-                </Stack>
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
               <MobileTimePicker
                 value={TTiming}
@@ -386,8 +434,14 @@ function Form() {
                   setTTiming(time1);
                   
                 }}
-              />
+                />
             </LocalizationProvider>
+
+             </Stack>
+
+              </div>
+
+              </div>
             </>
         )
     }
@@ -421,7 +475,10 @@ return (
           </div>
           <div className='body'>{PageDisplay()}</div>
           <div className='buttons'>
+          <Stack spacing={2} direction="row">
+
               <Button variant="contained" 
+              className="pre"
               disabled={page === 1}
               onClick={()=>{
                   setPage((currPage)=> currPage-1);
@@ -433,6 +490,8 @@ return (
                   setPage((currPage)=> currPage+1);
               }}
               >Next</Button>
+
+          </Stack>
           </div>
       </div>
   </div>

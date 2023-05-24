@@ -1,29 +1,56 @@
-.signup_form_inner{
+/* .signup_form_inner,.user_form_inner,.learn_form_inner{
   display: flex;
   flex-direction: column;
   align-items: center;
   height: 60vh; 
   justify-content: space-evenly;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  padding: 0px 50px 0px 50px;
-}
-/* .email_field,.pass_field{
-margin-top: 500px ;
+  padding: 0px 50px 35px 50px;
 } */
 
-.signup_form{
+.learn_form{
+  height: 520px;
+    margin-bottom: 10px;
+  display: flex;
+   justify-content: center;
+  align-items: center;
+}
+.learn_form_inner{
+
+  /* height: 55vh; */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    padding: 0px 40px 35px 40px;
+    margin: 15px;
+}
+
+
+.pre{
+  margin-right: 30px;
+}
+.signup_form,.user_form{
   height: 67vh;
   margin-bottom: 10px;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
   display: flex;
 
+}
+.L{
+  padding-right: 15px;
+  margin-left: 29px;
 }
 .switch{
 margin-top: 50px;
 }
-  .signup{
-    box-shadow: 2px 8px 13px
+  .signup,.user_form_inner{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 60vh;
+    justify-content: space-evenly;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    padding: 0px 50px 35px 50px;
   }
   .buttons{
     display: flex;
@@ -31,14 +58,15 @@ margin-top: 50px;
     justify-content: center;
   } 
   .user-data {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 100%;
     padding: 10px;
     margin-bottom: 10px;
     border: none;
     border-radius: 3px;
     font-size: 1rem;
-    /* -moz-appearance: textfield;
-  appearance: textfield; */
   
   
 }
