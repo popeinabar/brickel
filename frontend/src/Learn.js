@@ -5,6 +5,7 @@ import './Learn.css'
 import Filters from './component/Filters'
 import { useState, useEffect } from 'react'
 import loader from '../src/assets/loder.gif'
+import { useAuthContext } from './hooks/useAuthContext.js'
 
 const Learn = () => {
   const [buttonPopup, setButtonPopup] = useState(true);
@@ -14,10 +15,16 @@ const Learn = () => {
   
   const [data, setData] = useState(null);//
   const [ loading, setLoading] = useState(true)
+  const {user}= useAuthContext()
+
 
   useEffect(() => {//
       const fetchData = async () => {//
-        const response = await fetch(process.env.REACT_APP_API_URL+'/api/user');//
+        const response = await fetch(process.env.REACT_APP_API_URL+'/api/user',{
+          headers:{
+            'Authorization': `Bearer ${user.token}`
+          }
+        });//
         const json = await response.json();//
   
         if (response.ok) {//
@@ -27,7 +34,10 @@ const Learn = () => {
         }, 2000)
         }
       };//
-      fetchData();//
+      if(user){
+        fetchData();//
+
+      }
     }, []);//
   // console.log(filteredData)
   

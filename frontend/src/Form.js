@@ -16,10 +16,28 @@ import { subject } from './data/data';
 import {chapters} from './data/chapter';
 import {years} from './data/year'
 import { useEffect } from "react";
+import Box from '@mui/material/Box';
+import InputLabel from '@mui/material/InputLabel';
+import InputAdornment from '@mui/material/InputAdornment';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import IconButton from '@mui/material/IconButton';
+import Input from '@mui/material/Input';
+import FormControl from '@mui/material/FormControl';
+
+
 
 
 function Form() {
   const [page, setPage]= useState(0);
+  //show password
+  const [showPassword, setShowPassword] = React.useState(false);
+
+  const handleClickShowPassword = () => setShowPassword((show) => !show);
+
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
 
   const { signup, isLoading, errors } = useSignup();//
   const { user } = useAuthContext();
@@ -29,13 +47,8 @@ function Form() {
   const [Occupation, setOccupation] = useState("");
   const [Impression, setImpression] = useState("");
   const [newEmail, setNewEmail] = useState("");
-  console.log(newEmail)
-  // {user && (
-    
-  //   setNewEmail(user.user.email)
-  //   )}
+  
   const [LSubject, setLSubject] = useState([]);
-  // console.log(LSubject)
   // console.log(LSubject.map(item => `'${item.subject}'`).join(', '))
   const [LTopic, setLTopic] = useState([]);
   const [LTiming, setLTiming] = useState('');
@@ -47,7 +60,6 @@ function Form() {
   
   const [Image, setImage] = useState("");
   const [DisplayImage, setDisplayImage] = useState("");
-// console.log(Image)
   const [error, setError] = useState(null);
 
   const [isFormSubmitted, setIsFormSubmitted] = useState(false);
@@ -60,15 +72,13 @@ function Form() {
   const handleSumbitSignup = async (f) => {
     f.preventDefault();
     await signup(email, password);
-    // let backendError = JSON.stringify(errors);
-    // console.log(errors);
+    
     if (user === null) {
       setShowSignup(true);
     } else {
       setShowSignup(false);
       setPage(page + 1); // Move to the next page
     }
-    // console.log(email, password)
   };
 
   const handleFileUpload = async (e) => {
@@ -140,27 +150,84 @@ function Form() {
 
   
 
-  const FormTitle= ['Sign up', 'User Info','As a Lerner: What would you like to Learn','As a Teacher: What would you like to Teach', 'About you']
+  const FormTitle= []
 
 
   const PageDisplay = ()=>{
     if(page===0){
         return (
             <>
-              <form className="signup" onSubmit={handleSumbitSignup}>
-                <TextField id="outlined-basic-email" label="Email" variant="outlined"   type="email"
-                onChange={(f) => setEmail(f.target.value)}
-                value={email}/>
-                <TextField id="outlined-basic-pass" label="Password" variant="outlined"  type="password"
-                 onChange={(f) => setPassword(f.target.value)}
-                 value={password} />
-                <button className="smit redirect" disabled={isLoading}>
-                  {" "}
-                  {user ? "Register Done" : "Register"}{" "}
-                </button>
-                {/* <Button variant="contained" disabled={isLoading}>Register</Button> */}
-                {errors && <div>{errors}</div>}
-              </form>
+              <div className="signup_form">
+
+                <form className="signup" onSubmit={handleSumbitSignup}>
+                {/* <div className="signup_form_inner"> */}
+                  <h1>signup</h1>
+                <Box
+                    component="form"
+                    sx={{
+                      '& > :not(style)': { m: 1, },
+                    }}
+                    noValidate
+                    autoComplete="off"
+                  >
+                    <div className="input_fields">
+                    <Stack
+                      component="form"
+                      sx={{
+                        width: '25ch',
+                      }}
+                      spacing={2}
+                      noValidate
+                      autoComplete="off"
+                      >
+
+                          <TextField id="outlined-basic-email" label="Email" variant="outlined"   type="email"
+                          onChange={(f) => setEmail(f.target.value)}
+                          value={email}/>
+                          {/* <FormControl sx={{ m: 1, width: '25ch' }} variant="standard">
+                          <InputLabel htmlFor="standard-adornment-password">Password</InputLabel>
+                              <Input
+                                id="standard-adornment-password"
+                                type={showPassword ? 'text' : 'password'}
+                                onChange={(f) => setPassword(f.target.value)}
+                                value={password}
+                                endAdornment={
+                                  <InputAdornment position="end">
+                                    <IconButton
+                                      aria-label="toggle password visibility"
+                                      onClick={handleClickShowPassword}
+                                      onMouseDown={handleMouseDownPassword}
+                                    >
+                                      {showPassword ? <VisibilityOff /> : <Visibility />}
+                                    </IconButton>
+                                  </InputAdornment>
+                                }
+                                />
+                              </FormControl> */}
+                          <TextField id="outlined-basic-pass" className="pass_field" label="Password" variant="outlined"  type="password"
+                          onChange={(f) => setPassword(f.target.value)}
+                          value={password} />
+
+                    </Stack>
+
+                    
+                    </div>
+                    
+                </Box>
+                <div className="register_btn">
+
+                  <button className="smit redirect" disabled={isLoading}>
+                    {" "}
+                    {user ? "Register Done" : "Register"}{" "}
+                  </button>
+                  {errors && <div>{errors}</div>}
+
+                </div>
+                {/* </div> */}
+                </form>
+
+
+              </div>
             </>
         )
     }
@@ -168,20 +235,38 @@ function Form() {
  else if (page===1){
         return(
             <>
-              <TextField id="outlined-basic-name" label="Name" variant="outlined"   type="text"
+            <div className="user_form">
+              <div className="user_form_inner">
+
+              <h1>User info</h1>
+              <Stack
+                component="form"
+                sx={{
+                  width: '25ch',
+                }}
+                spacing={2}
+                noValidate
+                autoComplete="off"
+              >
+
+              <TextField id="outlined-basic-name" label="Name" variant="filled"   type="text"
                 onChange={(e) => setName(e.target.value)}
                 value={Name}  />
               
-              <TextField id="outlined-basic-name" label="email" variant="outlined"   type="text" InputProps={{readOnly: true,}}
+              <TextField id="outlined-basic-name" label="email" variant="filled"   type="text" InputProps={{readOnly: true,}}
               value={user.user.email}  />
 
-            <label className="L">Image</label>
-            <input
-              className="user-data"
-              type="file"
-              onChange={(e) => handleFileUpload(e)}
-              accept="image/*"//
-            />
+              </Stack>
+              <div className="user-data">
+                
+                <label className="L">Image: </label>
+                <input
+                 
+                  type="file"
+                  onChange={(e) => handleFileUpload(e)}
+                  accept="image/*"//
+                />
+              </div>      
               
               <Autocomplete
                   disablePortal
@@ -194,8 +279,12 @@ function Form() {
                     setDob(selectedOption);
                     console.log(selectedOption?.label);
                   }}
-                  renderInput={(params) => <TextField {...params} label="Year of birth" />}
+                  renderInput={(params) => <TextField {...params} variant='filled' label="Year of birth" />}
                 />
+
+              </div>
+
+            </div>
             </>
           )
       }
@@ -206,7 +295,12 @@ function Form() {
     else if (page===2){
         return(
             <>
-            <Stack spacing={3} sx={{ width: 500 }}>
+            <div className="learn_form">
+
+            <div className="learn_form_inner">
+
+            <h1>As a Lerner: What would you like to Learn</h1>
+            <Stack spacing={3}>
       
                 <Autocomplete
                     multiple
@@ -217,23 +311,22 @@ function Form() {
                     filterSelectedOptions
                     value={LSubject}
                     onChange={(event, selectedOptions) => {
-                      // Set the selected value using setLSubject
+                    
                       setLSubject(selectedOptions);
-                      // Console log the selected value
-                      // setLSubject(Lsub);
+                     
                       const Lsub=selectedOptions.map((option) => option.subject)
                       console.log("lern: ",Lsub);
                     }}
                     renderInput={(params) => (
                     <TextField
                         {...params}
+                        variant='filled'
                         label="Subject to Learn"
                         placeholder="Subject"
                     />
                     )}
                 /> 
-                </Stack>
-                <Stack spacing={3} sx={{ width: 500 }}>
+               
 
                 <Autocomplete
                     multiple
@@ -252,29 +345,39 @@ function Form() {
                     renderInput={(params) => (
                         <TextField
                             {...params}
+                            variant='filled'
                             label="Chapters to Learn"
                             placeholder="Chapters"
                         />
                     )}
                 />
-            </Stack>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <MobileTimePicker
                 value={LTiming}
                 onChange={(date) => {
                   const time = dayjs(date).format('HH:mm'); // Extract the time portion
                   setLTiming(time);
-                console.log(time)
+                  console.log(time)
                 }}
-              />
+                />
             </LocalizationProvider>
+              </Stack>
+
+            </div>
+
+            </div>
             </>
         )
     }
     else if(page===3){
         return(
             <>
-                <Stack spacing={3} sx={{ width: 500 }}>
+            <div className="learn_form">
+
+            <div className="learn_form_inner">
+
+            <h1>As a Teacher: What would you like to Teach</h1>
+                <Stack spacing={3}>
       
                 <Autocomplete
                     multiple
@@ -293,14 +396,12 @@ function Form() {
                     renderInput={(params) => (
                       <TextField
                         {...params}
+                        variant='filled'
                         label="Subject to teach"
                         placeholder="Subject"
                       />
                     )}
                   />
-
-                </Stack>
-                <Stack spacing={3} sx={{ width: 500 }}>
       
                 <Autocomplete
                     multiple
@@ -319,12 +420,12 @@ function Form() {
                     renderInput={(params) => (
                         <TextField
                             {...params}
+                            variant='filled'
                             label="Chapters to teach"
                             placeholder="Chapters"
                         />
                     )}
                 />
-                </Stack>
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
               <MobileTimePicker
                 value={TTiming}
@@ -333,14 +434,21 @@ function Form() {
                   setTTiming(time1);
                   
                 }}
-              />
+                />
             </LocalizationProvider>
+
+             </Stack>
+
+              </div>
+
+              </div>
             </>
         )
     }
     else{
         return(
             <>
+            <h1>Impression</h1>
                 <h3 >
                     <div>
                         Impression:
@@ -360,15 +468,17 @@ function Form() {
 
 
 return (
-  <div className='form'>
-      <div className='progress'>  </div>
-      <div className='form-container'>
+  <div className='switch' style={{ minHeight: "80vh" }}>
+      <div className='container'>
           <div className='header'>
-              <h1>{FormTitle[page]}</h1>
+              {/* <h1>{FormTitle[page]}</h1> */}
           </div>
           <div className='body'>{PageDisplay()}</div>
-          <div className='footer'>
+          <div className='buttons'>
+          <Stack spacing={2} direction="row">
+
               <Button variant="contained" 
+              className="pre"
               disabled={page === 1}
               onClick={()=>{
                   setPage((currPage)=> currPage-1);
@@ -380,6 +490,8 @@ return (
                   setPage((currPage)=> currPage+1);
               }}
               >Next</Button>
+
+          </Stack>
           </div>
       </div>
   </div>
