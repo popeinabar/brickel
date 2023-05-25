@@ -51,12 +51,19 @@ function Form() {
   const [LSubject, setLSubject] = useState([]);
   // console.log(LSubject.map(item => `'${item.subject}'`).join(', '))
   const [LTopic, setLTopic] = useState([]);
-  const [LTiming, setLTiming] = useState('');
+  const [LTiming, setLTiming] = useState(dayjs('2022-04-17T11:11'));
+  console.log("Test L Outside: ",LTiming)
+  const [LTimingObj, setLTimingObj] = useState(dayjs('2022-04-17T11:11'));
+
 // console.log(LTiming)//value coming from the onchange
   const [TSubject, setTSubject] = useState([]);
   const [TTopic, setTTopic] = useState([]);
-  const [TTiming, setTTiming] = useState('');
+  const [TTiming, setTTiming] = useState(dayjs('2022-04-17T11:22'));
+  const [TTimingObj, setTTimingObj] = useState(dayjs('2022-04-17T11:11'));
+
   // console.log(TTiming)//value coming from onchnage 
+  console.log("Test T Outside: ",TTiming)
+
   
   const [Image, setImage] = useState("");
   const [DisplayImage, setDisplayImage] = useState("");
@@ -184,7 +191,7 @@ function Form() {
                           <TextField id="outlined-basic-email" label="Email" variant="outlined"   type="email"
                           onChange={(f) => setEmail(f.target.value)}
                           value={email}/>
-                          {/* <FormControl sx={{ m: 1, width: '25ch' }} variant="standard">
+                          <FormControl sx={{ m: 1, width: '25ch' }} variant="standard">
                           <InputLabel htmlFor="standard-adornment-password">Password</InputLabel>
                               <Input
                                 id="standard-adornment-password"
@@ -203,10 +210,10 @@ function Form() {
                                   </InputAdornment>
                                 }
                                 />
-                              </FormControl> */}
-                          <TextField id="outlined-basic-pass" className="pass_field" label="Password" variant="outlined"  type="password"
+                              </FormControl>
+                          {/* <TextField id="outlined-basic-pass" className="pass_field" label="Password" variant="outlined"  type="password"
                           onChange={(f) => setPassword(f.target.value)}
-                          value={password} />
+                          value={password} /> */}
 
                     </Stack>
 
@@ -353,11 +360,12 @@ function Form() {
                 />
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <MobileTimePicker
-                value={LTiming}
+                value={LTimingObj}
                 onChange={(date) => {
                   const time = dayjs(date).format('HH:mm'); // Extract the time portion
                   setLTiming(time);
-                  console.log(time)
+                  setLTimingObj(date)
+                  console.log("Test L onChange: ",LTiming)
                 }}
                 />
             </LocalizationProvider>
@@ -428,11 +436,12 @@ function Form() {
                 />
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
               <MobileTimePicker
-                value={TTiming}
+                value={TTimingObj}
                 onChange={(date1) => {
                   const time1 = dayjs(date1).format('HH:mm'); // Extract the time portion
                   setTTiming(time1);
-                  
+                  setTTimingObj(date1)
+                  console.log("Test T onChange: ",TTiming)
                 }}
                 />
             </LocalizationProvider>
