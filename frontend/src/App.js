@@ -25,7 +25,7 @@ const App = ()=>{
     <Route path='/user' element={<User/>} />
     <Route path='/login' element={<Login/>} />
     </Routes>
-    {/* <Footer/> */}
+    <Footer/>
     </>
   );
 }

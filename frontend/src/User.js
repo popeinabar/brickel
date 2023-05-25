@@ -1,12 +1,10 @@
 import React, {useState,useEffect} from 'react'
-import user_data from './component/user_data'
-import pen from './assets/pen_low.png'
 import './User.css'
-import img1 from './assets/img1.jpg'
 import ToggleButton from './component/toggle'
 import { useAuthContext } from './hooks/useAuthContext'
 
 const User = () => {
+  const pen ="https://res.cloudinary.com/dvk41mh9f/image/upload/v1685013773/products/pen_low_cinj75.png"
   const [isEditable, setIsEditable] = useState(true);
   const [isOccuEditable, setIsOccuEditable] = useState(true);
   const [isImpEditable, setIsImpuEditable] = useState(true);
@@ -56,7 +54,7 @@ const User = () => {
       <div className='user'>
         <div className='userinfo-1'>
           <div className='user-img-div'>
-            <img className='image-info' src={img1} alt='lerner-tutor'></img>
+            <img className='image-info' src={"https://res.cloudinary.com/dvk41mh9f/image/upload/v1683527111/products/cwkjcrltybyquoecpanp.jpg"} alt='lerner-tutor'></img>
           </div>
           <div className='row1'>
               <div className='user-name border' >
