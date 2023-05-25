@@ -2,8 +2,6 @@ import React from 'react'
 import HerosSec from './component/HerosSec';
 import NavBar from './component/NavBar';
 import HeroSec2 from './component/HeroSec2';
-import books from './assets/back-nav.jpg'
-import abc from './assets/teach-home.jpg'
 import { Link } from 'react-router-dom';
 import './home.css'
 
@@ -14,7 +12,7 @@ const Home = () => {
     hero_heading:'Tutoring',
     hero_para1:'Teach others to get points and use that points to get free one on one learning...',
     hero_para2:'Teaching is another form of learning!!!',
-    image_home:abc,
+    image_home:"https://res.cloudinary.com/dvk41mh9f/image/upload/v1683391433/products/wzzqswxtmsmnsjxzqqoo.jpg",
     page:'home'
   }
   return (

@@ -48,23 +48,22 @@ function Form() {
   const [Impression, setImpression] = useState("");
   const [newEmail, setNewEmail] = useState("");
   
-  const [LSubject, setLSubject] = useState([]);
+  const [LSubject, setLSubject] = useState("");
+  const [LSubjectObj, setLSubjectObj]=useState([])
+  const [LTopicObj, setLTopicObj]=useState([])
   // console.log(LSubject.map(item => `'${item.subject}'`).join(', '))
-  const [LTopic, setLTopic] = useState([]);
-  const [LTiming, setLTiming] = useState(dayjs('2022-04-17T11:11'));
-  console.log("Test L Outside: ",LTiming)
+  const [LTopic, setLTopic] = useState("");
+  const [LTiming, setLTiming] = useState('11:11');
   const [LTimingObj, setLTimingObj] = useState(dayjs('2022-04-17T11:11'));
 
-// console.log(LTiming)//value coming from the onchange
+  console.log("L topic outside:", LTopic)
+  console.log("L subject outside:", LSubject)
+
   const [TSubject, setTSubject] = useState([]);
   const [TTopic, setTTopic] = useState([]);
-  const [TTiming, setTTiming] = useState(dayjs('2022-04-17T11:22'));
-  const [TTimingObj, setTTimingObj] = useState(dayjs('2022-04-17T11:11'));
+  const [TTiming, setTTiming] = useState('11:22');
+  const [TTimingObj, setTTimingObj] = useState(dayjs('2022-04-17T11:22'));
 
-  // console.log(TTiming)//value coming from onchnage 
-  console.log("Test T Outside: ",TTiming)
-
-  
   const [Image, setImage] = useState("");
   const [DisplayImage, setDisplayImage] = useState("");
   const [error, setError] = useState(null);
@@ -316,13 +315,14 @@ function Form() {
                     getOptionLabel={(option) => option.subject}
                     
                     filterSelectedOptions
-                    value={LSubject}
+                    value={LSubjectObj}
                     onChange={(event, selectedOptions) => {
-                    
-                      setLSubject(selectedOptions);
-                     
+                      
+                      setLSubjectObj(selectedOptions);
+                    //  console.log("Lerner subject inside",LSubject)
                       const Lsub=selectedOptions.map((option) => option.subject)
-                      console.log("lern: ",Lsub);
+                      // console.log("learn Subject inside: ",Lsub);
+                      setLSubject(Lsub)
                     }}
                     renderInput={(params) => (
                     <TextField
@@ -341,13 +341,16 @@ function Form() {
                     options={chapters}
                     getOptionLabel={(option) => option.Chapter}
                     filterSelectedOptions
-                    value={LTopic}
+                    value={LTopicObj}
                     onChange={(event, selectedOptions) => {
                       // Set the selected value using setLTopic
-                      setLTopic(selectedOptions);
-                  
+                      setLTopicObj(selectedOptions)
+                      console.log(selectedOptions)
+                      const Lern= selectedOptions.map(item => `'${item.subject}'`).join(', ')
+                      setLTopic(Lern)
+
                       // Console log the selected value
-                      console.log("Llearn: ",selectedOptions.map((option) => option.Chapter));
+                      // console.log("Llearn topic inside: ",selectedOptions.map((option) => option.Chapter));
                     }}
                     renderInput={(params) => (
                         <TextField
@@ -399,7 +402,7 @@ function Form() {
                       setTSubject(selectedOptions);
 
                       // Console log the selected value
-                      console.log("teach:",selectedOptions.map((option) => option.subject));
+                      // console.log("teach:",selectedOptions.map((option) => option.subject));
                     }}
                     renderInput={(params) => (
                       <TextField
@@ -423,7 +426,7 @@ function Form() {
                       setTTopic(selectedOptions);
                   
                       // Console log the selected value
-                      console.log("Tlearn: ",selectedOptions.map((option) => option.Chapter));
+                      // console.log("Tlearn: ",selectedOptions.map((option) => option.Chapter));
                     }}
                     renderInput={(params) => (
                         <TextField

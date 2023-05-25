@@ -1,5 +1,4 @@
 import React from 'react'
-import Learn from '../assets/study-home.jpg'
 import './HeroSec2.css'
 import { Link } from 'react-router-dom';
 
@@ -25,7 +24,7 @@ by teaching others....</p>
   
     </div>
    
-            <img className='learn-img' src={Learn} alt='teach'/>
+            <img className='learn-img' src={"https://res.cloudinary.com/dvk41mh9f/image/upload/v1685013885/products/study-home_ibtnmg.jpg"} alt='teach'/>
     </div>
     </>
   )

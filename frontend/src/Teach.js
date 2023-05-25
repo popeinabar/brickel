@@ -1,6 +1,5 @@
 import React from "react";
 import Serch from "./component/Search.js";
-import filter from "./assets/filter.png";
 import "./Learn.css";
 import { useState, useEffect } from "react";
 import Filters from "./component/Filters";
@@ -59,7 +58,7 @@ const Teach = () => {
           <img
             className="img-filter"
             onClick={() => setButtonPopup(true)}
-            src={filter}
+            src={"https://res.cloudinary.com/dvk41mh9f/image/upload/v1683310358/products/wly0lychg0dfmozsjjzk.png"}
             alt="filter"
           />
           {buttonPopup && (
