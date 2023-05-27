@@ -126,8 +126,9 @@ function ToggleButton() {
     <FormControlLabel control={<BrownSwitch {...label} defaultChecked onClick={handleClick} 
      /> } label={isOn ? 'As a TEACHER' : 'As a STUDENT'}/>
   {user && (
-
-     <button onClick={handleLogout} className='logout'>Log Out</button>
+    <Link to={'/login'}>
+     <button onClick={handleLogout} className='logout' >Log Out</button>
+     </Link>
   )}
 
 
