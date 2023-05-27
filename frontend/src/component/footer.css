@@ -1,4 +1,5 @@
 .about{
+    /* width: 100%; */
     background-color: black;
     color: white;
     display: flex;
@@ -8,6 +9,12 @@
     padding-left: 100px;
     padding-right: 107px;
     
+    
+}
+li{
+    text-decoration: none;
+    list-style-type: none;    
+
 }
 .donate{
     border: 5px;
