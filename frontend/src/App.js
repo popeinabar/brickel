@@ -9,12 +9,17 @@ import User from './User';
 import Login from './Login';
 import Footer from './component/Footer';
 import Form from './Form'
+import { useAuthContext } from "./hooks/useAuthContext";
+
 
 const App = ()=>{
+  const {user}= useAuthContext()
   return (
-
+    
     <>
+    {user && (
     <NavBar/>
+  )}
     <Routes>
     <Route path='/' element={<Login/>} />//
     <Route path='/form' element={<Form/>} />//
@@ -25,7 +30,9 @@ const App = ()=>{
     <Route path='/user' element={<User/>} />
     <Route path='/login' element={<Login/>} />
     </Routes>
-    <Footer/>
+    {user && (
+      <Footer/>
+  )}
     </>
   );
 }
