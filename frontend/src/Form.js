@@ -127,7 +127,6 @@ function Form() {
       setNewEmail("");
       setIsFormSubmitted(true);
       console.log("new user added");
-      setPage(page + 1);
     }
     setIsSubmitting(false);
   };
@@ -153,7 +152,7 @@ function Form() {
 
                 <form className="signup" onSubmit={handleSumbitSignup}>
                 {/* <div className="signup_form_inner"> */}
-                  <h1>signup</h1>
+                  <h1>Register</h1>
                 <Box
                     component="form"
                     sx={{
@@ -173,11 +172,11 @@ function Form() {
                       autoComplete="off"
                       >
 
-                          <TextField id="outlined-basic-email" label="Email" variant="outlined"   type="email"
+                          <TextField id="outlined-basic-email" label="Email" variant='filled'  type="email"
                           onChange={(f) => setEmail(f.target.value)}
                           value={email}/>
                         
-                          <TextField id="outlined-basic-pass" className="pass_field" label="Password" variant="outlined"  type="password"
+                          <TextField id="outlined-basic-pass" className="pass_field" label="Password" variant='filled'  type="password"
                           onChange={(f) => setPassword(f.target.value)}
                           value={password} />
 

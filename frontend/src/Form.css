@@ -29,13 +29,14 @@
 
 .L{
   padding-right: 15px;
-  margin-left: 29px;
+  margin-left: 29px
 }
 .switch{
 margin-top: 50px;
 }
 
   .buttons{
+    margin-bottom: 40px;
     display: flex;
     align-items: center;
     justify-content: center;

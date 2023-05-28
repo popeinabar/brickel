@@ -28,7 +28,7 @@ userSchema.statics.signup=async function(email, password){//using this keywordso
     }
     const exists= await this.findOne({email})
     if(exists){
-        throw Error('email already exists')
+        throw Error('Email already exists')
     }
 
     if(!validator.isEmail(email)){
@@ -36,7 +36,7 @@ userSchema.statics.signup=async function(email, password){//using this keywordso
     }
     
     if(!validator.isStrongPassword(password)){
-        throw Error('password is not strong enough')
+        throw Error('Password is not strong enough')
     }
 
 
@@ -57,11 +57,11 @@ userSchema.statics.login=async function(email, password){
     const user= await this.findOne({email})
 
     if(!user){
-        throw Error('email not in use')
+        throw Error('Email not in use')
     }
     const match = await bcrypt.compare(password, user.password)
     if(!match){
-        throw Error('invalid login credential')
+        throw Error('Invalid Login credentials')
     }    
     return user
 }
