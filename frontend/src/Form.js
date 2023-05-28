@@ -17,47 +17,26 @@ import {chapters} from './data/chapter';
 import {years} from './data/year'
 import { useEffect } from "react";
 import Box from '@mui/material/Box';
-import InputLabel from '@mui/material/InputLabel';
-import InputAdornment from '@mui/material/InputAdornment';
-import Visibility from '@mui/icons-material/Visibility';
-import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import IconButton from '@mui/material/IconButton';
-import Input from '@mui/material/Input';
-import FormControl from '@mui/material/FormControl';
-
 
 
 
 function Form() {
   const [page, setPage]= useState(0);
-  //show password
-  const [showPassword, setShowPassword] = React.useState(false);
-
-  const handleClickShowPassword = () => setShowPassword((show) => !show);
-
-  const handleMouseDownPassword = (event) => {
-    event.preventDefault();
-  };
 
   const { signup, isLoading, errors } = useSignup();//
   const { user } = useAuthContext();
   const [Name, setName] = useState("");
   const [DOB, setDob] = useState(null);
-  // console.log(DOB)
+  console.log(DOB)
   const [Occupation, setOccupation] = useState("");
+  console.log(Occupation)
   const [Impression, setImpression] = useState("");
   const [newEmail, setNewEmail] = useState("");
   
-  const [LSubject, setLSubject] = useState("");
-  const [LSubjectObj, setLSubjectObj]=useState([])
-  const [LTopicObj, setLTopicObj]=useState([])
-  // console.log(LSubject.map(item => `'${item.subject}'`).join(', '))
-  const [LTopic, setLTopic] = useState("");
+  const [LSubject, setLSubject] = useState([]);
+  const [LTopic, setLTopic] = useState([]);
   const [LTiming, setLTiming] = useState('11:11');
   const [LTimingObj, setLTimingObj] = useState(dayjs('2022-04-17T11:11'));
-
-  console.log("L topic outside:", LTopic)
-  console.log("L subject outside:", LSubject)
 
   const [TSubject, setTSubject] = useState([]);
   const [TTopic, setTTopic] = useState([]);
@@ -73,6 +52,7 @@ function Form() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  // console.log(password)
   const [showSignup, setShowSignup] = useState(false);
 
   const handleSumbitSignup = async (f) => {
@@ -83,7 +63,7 @@ function Form() {
       setShowSignup(true);
     } else {
       setShowSignup(false);
-      setPage(page + 1); // Move to the next page
+      setPage(1); // Move to the next page
     }
   };
 
@@ -95,6 +75,11 @@ function Form() {
   };
   const handleSumbit = async (e) => {
     e.preventDefault();
+
+    if(!user){
+      setError('you must be logged in')
+      return
+    }
     if (isSubmitting) {
       return; // Form is already being submitted
     }
@@ -117,6 +102,7 @@ function Form() {
       method: "POST",
       headers: {
         "Content-type": "application/json",
+        'Authorization': `Bearer ${user.token}`
       },
       body: JSON.stringify(userData),
     });
@@ -141,7 +127,6 @@ function Form() {
       setNewEmail("");
       setIsFormSubmitted(true);
       console.log("new user added");
-      setPage(page + 1);
     }
     setIsSubmitting(false);
   };
@@ -167,7 +152,7 @@ function Form() {
 
                 <form className="signup" onSubmit={handleSumbitSignup}>
                 {/* <div className="signup_form_inner"> */}
-                  <h1>signup</h1>
+                  <h1>Register</h1>
                 <Box
                     component="form"
                     sx={{
@@ -187,32 +172,13 @@ function Form() {
                       autoComplete="off"
                       >
 
-                          <TextField id="outlined-basic-email" label="Email" variant="outlined"   type="email"
+                          <TextField id="outlined-basic-email" label="Email" variant='filled'  type="email"
                           onChange={(f) => setEmail(f.target.value)}
                           value={email}/>
-                          <FormControl sx={{ m: 1, width: '25ch' }} variant="standard">
-                          <InputLabel htmlFor="standard-adornment-password">Password</InputLabel>
-                              <Input
-                                id="standard-adornment-password"
-                                type={showPassword ? 'text' : 'password'}
-                                onChange={(f) => setPassword(f.target.value)}
-                                value={password}
-                                endAdornment={
-                                  <InputAdornment position="end">
-                                    <IconButton
-                                      aria-label="toggle password visibility"
-                                      onClick={handleClickShowPassword}
-                                      onMouseDown={handleMouseDownPassword}
-                                    >
-                                      {showPassword ? <VisibilityOff /> : <Visibility />}
-                                    </IconButton>
-                                  </InputAdornment>
-                                }
-                                />
-                              </FormControl>
-                          {/* <TextField id="outlined-basic-pass" className="pass_field" label="Password" variant="outlined"  type="password"
+                        
+                          <TextField id="outlined-basic-pass" className="pass_field" label="Password" variant='filled'  type="password"
                           onChange={(f) => setPassword(f.target.value)}
-                          value={password} /> */}
+                          value={password} />
 
                     </Stack>
 
@@ -231,7 +197,7 @@ function Form() {
                 </div>
                 {/* </div> */}
                 </form>
-
+ 
 
               </div>
             </>
@@ -247,9 +213,7 @@ function Form() {
               <h1>User info</h1>
               <Stack
                 component="form"
-                sx={{
-                  width: '25ch',
-                }}
+                
                 spacing={2}
                 noValidate
                 autoComplete="off"
@@ -261,6 +225,10 @@ function Form() {
               
               <TextField id="outlined-basic-name" label="email" variant="filled"   type="text" InputProps={{readOnly: true,}}
               value={user.user.email}  />
+
+              <TextField id="outlined-basic-name" label="Occupation" variant="filled"   type="text"
+                onChange={(e) => setOccupation(e.target.value)}
+                value={Occupation}  />
 
               </Stack>
               <div className="user-data">
@@ -278,7 +246,7 @@ function Form() {
                   disablePortal
                   id="combo-box-demo"
                   options={years}
-                  sx={{ width: 300 }}
+                  sx={{ width: 200 }}
                   getOptionLabel={(option) => option.label}
                   value={DOB}
                   onChange={(event, selectedOption) => {
@@ -315,14 +283,13 @@ function Form() {
                     getOptionLabel={(option) => option.subject}
                     
                     filterSelectedOptions
-                    value={LSubjectObj}
+                    value={LSubject}
                     onChange={(event, selectedOptions) => {
-                      
-                      setLSubjectObj(selectedOptions);
-                    //  console.log("Lerner subject inside",LSubject)
-                      const Lsub=selectedOptions.map((option) => option.subject)
-                      // console.log("learn Subject inside: ",Lsub);
-                      setLSubject(Lsub)
+                      // Set the selected value using setLTopic
+                      setLSubject(selectedOptions)
+                    
+                      // const Lern= selectedOptions.map(item => `'${item.subject}'`).join(', ')
+                     
                     }}
                     renderInput={(params) => (
                     <TextField
@@ -341,16 +308,13 @@ function Form() {
                     options={chapters}
                     getOptionLabel={(option) => option.Chapter}
                     filterSelectedOptions
-                    value={LTopicObj}
+                    value={LTopic}
                     onChange={(event, selectedOptions) => {
                       // Set the selected value using setLTopic
-                      setLTopicObj(selectedOptions)
-                      console.log(selectedOptions)
-                      const Lern= selectedOptions.map(item => `'${item.subject}'`).join(', ')
-                      setLTopic(Lern)
-
-                      // Console log the selected value
-                      // console.log("Llearn topic inside: ",selectedOptions.map((option) => option.Chapter));
+                      setLTopic(selectedOptions)
+                    
+                      // const Lern= selectedOptions.map(item => `'${item.subject}'`).join(', ')
+                     
                     }}
                     renderInput={(params) => (
                         <TextField
@@ -460,18 +424,25 @@ function Form() {
     else{
         return(
             <>
-            <h1>Impression</h1>
-                <h3 >
-                    <div>
+            <div className="impression_outer">
+
+            <div className="impression border">
+                  {/* <h1> About you</h1> */}
+
+                <h3>
+                   
                         Impression:
                         <textarea  className='impress-text input-info' type='text' placeholder='tell us about your self'
-                        onChange={(e) => setOccupation(e.target.value)}
-                        value={Occupation}
+                        value={Impression}
+                        onChange={(e) => setImpression(e.target.value)}
                         ></textarea >
-                    </div>
+                   
                 </h3>
-                {/* <Button variant="contained" onClick={handleSumbit}>Submit</Button> */}
                 <button className="addme" disabled={isSubmitting} onClick={handleSumbit}>Add me</button>
+
+            </div>
+
+            </div>
 
             </>
         )
@@ -482,22 +453,19 @@ function Form() {
 return (
   <div className='switch' style={{ minHeight: "80vh" }}>
       <div className='container'>
-          <div className='header'>
-              {/* <h1>{FormTitle[page]}</h1> */}
-          </div>
           <div className='body'>{PageDisplay()}</div>
           <div className='buttons'>
           <Stack spacing={2} direction="row">
 
               <Button variant="contained" 
               className="pre"
-              disabled={page === 1}
+              disabled={page === 1 || page===0}
               onClick={()=>{
                   setPage((currPage)=> currPage-1);
               }}
               >previous</Button>
               <Button variant="contained" 
-              disabled={page === FormTitle.length - 1}
+              disabled={page === 4 || page===0}
               onClick={()=>{
                   setPage((currPage)=> currPage+1);
               }}

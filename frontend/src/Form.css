@@ -1,19 +1,10 @@
-/* .signup_form_inner,.user_form_inner,.learn_form_inner{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  height: 60vh; 
-  justify-content: space-evenly;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  padding: 0px 50px 35px 50px;
-} */
-
-.learn_form{
+.learn_form,.user_form,.signup_form{
   height: 90%;
     margin-bottom: 10px;
   display: flex;
    justify-content: center;
   align-items: center;
+  width: 100vw
 }
 .learn_form_inner{
 
@@ -22,37 +13,30 @@
     padding: 0px 40px 35px 40px;
     margin: 15px;
 }
-
+.user_form_inner,.signup{
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  padding: 0px 40px 35px 40px;
+  margin: 15px;
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+  /* width: 100vw */
+}
 
 .pre{
   margin-right: 30px;
 }
-.signup_form,.user_form{
-  height: 67vh;
-  margin-bottom: 10px;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  display: flex;
 
-}
 .L{
   padding-right: 15px;
-  margin-left: 29px;
+  margin-left: 29px
 }
 .switch{
 margin-top: 50px;
 }
-  .signup,.user_form_inner{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: 60vh;
-    justify-content: space-evenly;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    padding: 0px 50px 35px 50px;
-  }
+
   .buttons{
+    margin-bottom: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -88,6 +72,27 @@ margin-top: 50px;
     font-size: 0.9rem;
     text-align: center;
     margin-top: 10px;
+  }
+
+  .impression{
+    height: 30vh;
+    width: 30vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    
+  }
+  .addme{
+    width: 100px;
+  }
+  .impression h3{
+    display: flex;
+  }
+  .impression_outer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   
