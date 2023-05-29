@@ -3,7 +3,7 @@ import "./Form.css";
 import { useSignup } from "./hooks/useSignup";
 import { Link } from "react-router-dom";
 import TextField from '@mui/material/TextField';
-import { useState } from "react";
+import { useState} from "react";
 import { useAuthContext } from "./hooks/useAuthContext";
 import Button from '@mui/material/Button';
 import dayjs from 'dayjs';
@@ -17,19 +17,20 @@ import {chapters} from './data/chapter';
 import {years} from './data/year'
 import { useEffect } from "react";
 import Box from '@mui/material/Box';
+import { useNavigate } from "react-router-dom";
 
 
 
 function Form() {
   const [page, setPage]= useState(0);
-
+  const navigate = useNavigate();
   const { signup, isLoading, errors } = useSignup();//
   const { user } = useAuthContext();
   const [Name, setName] = useState("");
   const [DOB, setDob] = useState(null);
-  console.log(DOB)
+  // console.log(DOB)
   const [Occupation, setOccupation] = useState("");
-  console.log(Occupation)
+  // console.log(Occupation)
   const [Impression, setImpression] = useState("");
   const [newEmail, setNewEmail] = useState("");
   
@@ -46,6 +47,7 @@ function Form() {
   const [Image, setImage] = useState("");
   const [DisplayImage, setDisplayImage] = useState("");
   const [error, setError] = useState(null);
+  console.log(error)
 
   const [isFormSubmitted, setIsFormSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -127,6 +129,8 @@ function Form() {
       setNewEmail("");
       setIsFormSubmitted(true);
       console.log("new user added");
+      navigate("/home")
+      // history.push("/home");
     }
     setIsSubmitting(false);
   };
@@ -438,6 +442,7 @@ function Form() {
                         ></textarea >
                    
                 </h3>
+                {error && <div className="error">{error}</div>}
                 <button className="addme" disabled={isSubmitting} onClick={handleSumbit}>Add me</button>
 
             </div>
