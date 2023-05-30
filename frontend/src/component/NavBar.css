@@ -56,6 +56,7 @@ a{
 display:flex;
 margin-top: -10px; 
 width: 23rem;
+margin-right: 15px;
 }
 
 @media (max-width:684px) {
@@ -71,6 +72,9 @@ width: 23rem;
     
     
     display: none;
+}
+.navbar-left{
+  max-width: 50px;
 }
 .navbar{
    padding-left: 25px;

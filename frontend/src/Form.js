@@ -277,7 +277,7 @@ function Form() {
 
             <div className="learn_form_inner">
 
-            <h1>As a Lerner: What would you like to Learn</h1>
+            <h1>As a Learner: What would you like to Learn</h1>
             <Stack spacing={3}>
       
                 <Autocomplete
