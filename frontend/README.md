@@ -1,70 +1,26 @@
-# Getting Started with Create React App
+# Libraries Used
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+1. [date-fns](https://date-fns.org/)
+2. [Material UI](https://mui.com/)
+3. [React](https://react.dev/)
+4. [react-router-dom](https://reactrouter.com/en/main)
 
-## Available Scripts
+# Page Breakdown
 
-In the project directory, you can run:
+*Form.js*
+This code snippet is a Form page implemented in React. It utilizes the MUI autofill buttons test fields and clock which increases the user experience. Users can register themself as a teacher and a learner. The register is preformed by JWT.
 
-### `npm start`
+*Learn.js*
+This snippet will display a frontend component for users who wants to learn with a connect button from which the user can connect with the desired tutor. This component will show the basic information for the users to connect with the deisred learner.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+*Teach.js*
+This snippet will display a frontend component for users who wants to teach with a similar connect feature as learn component. This component will show the basic information for the users to connect with the desired turor.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+*Home.js*
+This component showcases the home page of the web app which shows the detail of the website and the unlimited learning possibilities also users can show their skills to the world.
 
-### `npm test`
+*login*
+This code snippet is a login page implemented using React and JWT. It is one of the safest of login into a website. Users can register if they are not registered already.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+*User*
+This component showcases the user information which shows the detail of the users logged in also users can update according to their needs. It utilizes the MUI toggle and buttons and can directly move to their preferred page.
