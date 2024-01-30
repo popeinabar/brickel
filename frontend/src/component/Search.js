@@ -84,7 +84,7 @@ const Search = (props) => {
           </div>
           <ul className="flex">
             <div className="flex1">
-              <li>1
+              <li>
                 {props.name}: {user.Name}
               </li>
               <li>

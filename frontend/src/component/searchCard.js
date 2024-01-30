@@ -73,6 +73,7 @@ export default function RecipeReviewCard(props) {
       <CardMedia
         component="img"
         height="294"
+        width="345"
         image={user.Image.url}
         alt="Paella dish"
       />
@@ -92,11 +93,11 @@ export default function RecipeReviewCard(props) {
       </CardContent>
       <CardActions disableSpacing>
        
-        <Button variant="contained">Connect
-        <a href={"mailto:" + user?.Email}>
+        <a href={"mailto:" + user?.Email} target="_blank">
+        <Button variant="contained" >Connect
 
-        </a>
         </Button>
+        </a>
         <ExpandMore
           expand={expanded}
           onClick={handleExpandClick}

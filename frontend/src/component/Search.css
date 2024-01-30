@@ -1,6 +1,9 @@
 .mui-card{
     margin-bottom: 35px;
 }
+.css-o69gx8-MuiCardMedia-root{
+    width: 345px;
+}
 .mui-card-div{
     display: flex;
     flex-direction: column;
