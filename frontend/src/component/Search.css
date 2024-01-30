@@ -1,8 +1,11 @@
-/* .info{
+.mui-card{
+    margin-bottom: 35px;
+}
+.mui-card-div{
     display: flex;
-} */
-
-
+    flex-direction: column;
+    align-items: center;
+}
 
 .img-filter{
     height: 10%;
@@ -24,16 +27,14 @@ min-height: 120px;
 min-width: 160px;
 margin: 2vw;
 overflow: hidden;
+display: flex;
+align-items: center;
 }
 .image-info{
-    /* height: 12%;
-    width:12%; */
-    min-height: 120px;
-    min-width: 160px;
-    max-width: 100%;
-    max-height: 100%;
-   
-    }
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
 .info{
     display: flex;
 }
@@ -44,7 +45,7 @@ overflow: hidden;
     margin: 3vw;
 }
 .flex1{
-width: 80%;
+width:60%;
 }
 .flex2{
     width: 100%;
@@ -74,6 +75,8 @@ cursor: pointer;
 }
 .flex4{
     display: flex ;
+    width: 100%;
+    padding-left: 20px;
 }
 .imp2{
 display: none;
@@ -91,6 +94,9 @@ display: none;
 .span-left{
     padding-right: 5vw;
 }
+li{
+    padding-bottom: 7px;
+}
 @media (max-width: 800px) {
     .flex{
         display: flex;
@@ -102,9 +108,12 @@ display: none;
     .flex3{
         align-self: flex-start;
     }
+    .flex4{
+        padding: 0px;
+    }
     
 }
-@media (max-width: 707px) {
+/* @media (max-width: 707px) {
     .imp2{
         display: block;
         margin: 10px;   
@@ -147,4 +156,4 @@ display: none;
         align-self: center;
         padding-left: 34px;
     }
-}
+} */
