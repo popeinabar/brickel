@@ -5,42 +5,48 @@ import Filters from './component/Filters'
 import { useState, useEffect } from 'react'
 import loader from '../src/assets/loder.gif'
 import { useAuthContext } from './hooks/useAuthContext.js'
+import { useStudentContext } from './hooks/useStudentContext.js'
 
 const Learn = () => {
   const [buttonPopup, setButtonPopup] = useState(true);
   const [filteredData, setFilteredData]=useState({  timing: "", 
   subject: "", 
   topic: "" })
+
+  const {students, dispatch}= useStudentContext()
   
-  const [data, setData] = useState(null);//
+
   const [ loading, setLoading] = useState(true)
   const {user}= useAuthContext()
 
 
-  useEffect(() => {//
-      const fetchData = async () => {//
+  useEffect(() => {
+      const fetchData = async () => {
+
         const response = await fetch(process.env.REACT_APP_API_URL+'/api/user',{
           headers:{
             'Authorization': `Bearer ${user.token}`
           }
-        });//
-        const json = await response.json();//
-  
-        if (response.ok) {//
-          setData(json);//
+        });
+        const json = await response.json();
+
+        if (response.ok) {
+
+          dispatch({type:'SET_STUDENTS', payload:json})
+          console.log(json)
           setTimeout(()=>{
           setLoading(false)
         }, 2000)
         }
-      };//
+      };
       if(user){
-        fetchData();//
-
+        fetchData();
+        
       }
-    }, []);//
-  // console.log(filteredData)
-  
+    }, [dispatch]);
     
+    console.log(students)
+  
 
   return (
 
@@ -68,18 +74,20 @@ const Learn = () => {
             />
           )}
         </div>
-        {data&&
-        <Serch filteredData={filteredData}
-                any={data}
-                name='Name'
-                subject='Subject'
-                topic='Topic'
-                timing='Timing'
-                likes='Likes:'
-                occupation='Occupation'
-                impression='Impression'
-                isTeaching={false}
-        />
+        {students && students.map((student)=>(
+
+          <Serch filteredData={filteredData}
+                  any={student}
+                  name='Name'
+                  subject='Subject'
+                  topic='Topic'
+                  timing='Timing'
+                  likes='Likes:'
+                  occupation='Occupation'
+                  impression='Impression'
+                  isTeaching={false}
+          />
+        ))
         }
       </div>
     )}

@@ -5,42 +5,40 @@ import { useState, useEffect } from "react";
 import Filters from "./component/Filters";
 import { useAuthContext } from "./hooks/useAuthContext.js";
 import loader from '../src/assets/loder.gif'
+import { useStudentContext } from "./hooks/useStudentContext.js";
+
 
 const Teach = () => {
   const { user } = useAuthContext();
-  // console.log("This is user", user);
+
+  const {students, dispatch}= useStudentContext()
+
   const [buttonPopup, setButtonPopup] = useState(true);
   const [ loading, setLoading] = useState(true)
 
-  const [data, setData] = useState(null); //
-    
-
-
   useEffect(() => {
-    //
+    
     const fetchData = async () => {
-      //
+      
       const response = await fetch(process.env.REACT_APP_API_URL + "/api/user",{
           headers:{
             'Authorization': `Bearer ${user.token}`
           }
-        }); //
-      const json = await response.json(); //
+        }); 
+      const json = await response.json(); 
 
       if (response.ok) {
-        //
-        setData(json); //
+        
+        dispatch({type:'SET_STUDENTS', payload:json})
         setTimeout(()=>{
-
           setLoading(false)
         }, 2000)
-      } //
-    }; //
+      } 
+    }; 
     if(user){
-
-      fetchData(); //
+      fetchData(); 
     }
-  }, []); //
+  }, []); 
   const [filteredData, setFilteredData] = useState({
     timing: "",
     subject: "",
@@ -70,10 +68,10 @@ const Teach = () => {
             />
           )}
         </div>
-        {data && (
+        {students && students.map((student)=>(
           <Serch
             filteredData={filteredData}
-            any={data}
+            any={student}
             name="Name"
             subject="Subject"
             topic="Topic"
@@ -82,7 +80,7 @@ const Teach = () => {
             impression="Impression"
             isTeaching={true}
           />
-        )}
+        ))}
       </div>
     )}
       

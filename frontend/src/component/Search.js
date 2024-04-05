@@ -32,7 +32,7 @@ const Search = (props) => {
       {/* Check the window width and render the appropriate component */}
       {windowWidth <= 700 ? (
         <div className='mui-card-div'>
-
+{/* for small screen */}
           <SearchCard 
           timingf={timingf}
           data={data}
