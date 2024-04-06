@@ -19,9 +19,13 @@ import { useEffect } from "react";
 import Box from '@mui/material/Box';
 import { useNavigate } from "react-router-dom";
 
-
+import { useStudentContext } from "./hooks/useStudentContext";
 
 function Form() {
+
+  const{dispatch}=useStudentContext()
+ 
+
   const [page, setPage]= useState(0);
   const navigate = useNavigate();
   const { signup, isLoading, errors } = useSignup();//
@@ -130,7 +134,8 @@ function Form() {
       setIsFormSubmitted(true);
       console.log("new user added");
       navigate("/home")
-      // history.push("/home");
+
+      dispatch({type:'CREATE_STUDENTS', paload:json})
     }
     setIsSubmitting(false);
   };

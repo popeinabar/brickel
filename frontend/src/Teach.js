@@ -68,10 +68,10 @@ const Teach = () => {
             />
           )}
         </div>
-        {students && students.map((student)=>(
+        {students && (
           <Serch
             filteredData={filteredData}
-            any={student}
+            any={students}
             name="Name"
             subject="Subject"
             topic="Topic"
@@ -80,7 +80,7 @@ const Teach = () => {
             impression="Impression"
             isTeaching={true}
           />
-        ))}
+        )}
       </div>
     )}
       

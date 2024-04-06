@@ -4,17 +4,28 @@ export const StudentContext=createContext()
 
 export const studentReducer=(state,action)=>{
     switch (action.type) {
-        case 'SET_ STUDENTS':
+        case 'SET_STUDENTS':
           return {
-
+            ...state,
             students: action.payload,
-
+            loading: false,
           };
         case 'CREATE_STUDENTS':
           return {
-
+            ...state,
             students: [action.payload, ...state.students],
           };
+
+          case 'FETCH_BLOGS_START':
+            return {
+              ...state,
+              loading: true, // Set loading to true when fetching starts
+            };
+          case 'FETCH_BLOGS_END':
+            return {
+              ...state,
+              loading: false, // Set loading to false when fetching ends
+            };
        default:
           return state;
       }
@@ -23,8 +34,8 @@ export const studentReducer=(state,action)=>{
 
 export const StudentContextProvider=({children})=>{
     const[state,dispatch]=useReducer(studentReducer,{
-        students:null,
-
+        students:[],
+        loading:true,
     })
 
     return(

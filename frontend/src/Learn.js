@@ -16,26 +16,26 @@ const Learn = () => {
   const {students, dispatch}= useStudentContext()
   
 
-  const [ loading, setLoading] = useState(true)
+  const [ ani, setAni] = useState(true)
   const {user}= useAuthContext()
 
 
   useEffect(() => {
+   
       const fetchData = async () => {
-
+console.log('api is called')
         const response = await fetch(process.env.REACT_APP_API_URL+'/api/user',{
           headers:{
             'Authorization': `Bearer ${user.token}`
           }
         });
         const json = await response.json();
-
         if (response.ok) {
 
           dispatch({type:'SET_STUDENTS', payload:json})
           console.log(json)
           setTimeout(()=>{
-          setLoading(false)
+          setAni(false)
         }, 2000)
         }
       };
@@ -45,14 +45,16 @@ const Learn = () => {
       }
     }, [dispatch]);
     
-    console.log(students)
+    // console.log(students)
+  
+
   
 
   return (
 
 
     <>
-    {loading?(<div className="loder-div">
+    {ani?(<div className="loder-div">
       <img className="loader" alt='loader' src={loader}/>
     </div>)
     :(
@@ -74,10 +76,10 @@ const Learn = () => {
             />
           )}
         </div>
-        {students && students.map((student)=>(
+        {students &&(
 
           <Serch filteredData={filteredData}
-                  any={student}
+                  any={students}
                   name='Name'
                   subject='Subject'
                   topic='Topic'
@@ -87,8 +89,7 @@ const Learn = () => {
                   impression='Impression'
                   isTeaching={false}
           />
-        ))
-        }
+        )}
       </div>
     )}
     </>
