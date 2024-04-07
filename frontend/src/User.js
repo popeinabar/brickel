@@ -12,17 +12,18 @@ const User = () => {
 //   console.log( `value of user ${user}`)
 
   const {students}= useStudentContext()
+  console.log(students)
+  
+  console.log(students?.Email+ " this is students email")
+  console.log("this is user "+user?.user?.email)
+  
+  const userDocEmail=user?.user?.email;
 
-
-const userDocEmail=user.user.email;
-
-console.log("this is user"+userDocEmail)
 let currentUser;
 
 // Use array methods like find to search for the current user
 if (students) {
   students.map((student) => {
-    console.log(student.Email+"this is students email")
     if (student.Email === userDocEmail) {
       currentUser = student;
       console.log("user found")
@@ -89,7 +90,7 @@ console.log( `value after comparision ${currentUser}`)
                     className='input-info'
                     type='text'
                     placeholder='Name'
-                    defaultValue={currentUser.Name}
+                    defaultValue={currentUser?.Name}
                     readOnly={isEditable}
                     // onBlur={handleInputBlur}
                   ></input>
@@ -106,13 +107,13 @@ console.log( `value after comparision ${currentUser}`)
 
                 
               <h3>
-                E-Mail:<input type="text" className='email-input input-info'  readOnly value={user.user.email} />
+                E-Mail:<input type="text" className='email-input input-info'  readOnly value={user?.user?.email} />
               </h3>
               )}
             </div>
             <div className='user-dob border' >
               <h3>
-                DOB:<input type="text" className='dob-input input-info'  readOnly value={currentUser.DOB.label} />
+                DOB:<input type="text" className='dob-input input-info'  readOnly value={currentUser?.DOB.label} />
               </h3>
             </div>
           </div>

@@ -12,38 +12,36 @@ const Learn = () => {
   const [filteredData, setFilteredData]=useState({  timing: "", 
   subject: "", 
   topic: "" })
-
   const {students, dispatch}= useStudentContext()
-  
-
-  const [ ani, setAni] = useState(true)
   const {user}= useAuthContext()
-
+  const [ loading, setLoading] = useState(true)
 
   useEffect(() => {
-   
+    console.log("inside use effect but outside fetch data")
       const fetchData = async () => {
 console.log('api is called')
         const response = await fetch(process.env.REACT_APP_API_URL+'/api/user',{
           headers:{
             'Authorization': `Bearer ${user.token}`
           }
-        });
+        }
+        );
         const json = await response.json();
         if (response.ok) {
 
           dispatch({type:'SET_STUDENTS', payload:json})
-          console.log(json)
           setTimeout(()=>{
-          setAni(false)
-        }, 2000)
+            setLoading(false)
+          }, 2000)
+
+          
         }
       };
       if(user){
         fetchData();
         
-      }
-    }, [dispatch]);
+      } 
+    }, [dispatch,user]);
     
     // console.log(students)
   
@@ -54,8 +52,8 @@ console.log('api is called')
 
 
     <>
-    {ani?(<div className="loder-div">
-      <img className="loader" alt='loader' src={loader}/>
+     {loading?(<div className="loder-div">
+      <img className="loader" alt="loader" src={loader}/>
     </div>)
     :(
       <div className='serch' style={{ minHeight: "80vh" }}>
@@ -91,7 +89,7 @@ console.log('api is called')
           />
         )}
       </div>
-    )}
+)}
     </>
   );
 };

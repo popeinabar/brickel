@@ -17,9 +17,9 @@ const Teach = () => {
   const [ loading, setLoading] = useState(true)
 
   useEffect(() => {
-    
+    console.log("inside use effect but outside fetch data")
     const fetchData = async () => {
-      
+      console.log('api is called')
       const response = await fetch(process.env.REACT_APP_API_URL + "/api/user",{
           headers:{
             'Authorization': `Bearer ${user.token}`
@@ -38,7 +38,7 @@ const Teach = () => {
     if(user){
       fetchData(); 
     }
-  }, []); 
+  }, [dispatch,user]); 
   const [filteredData, setFilteredData] = useState({
     timing: "",
     subject: "",
