@@ -9,7 +9,8 @@ import User from './User';
 import Login from './Login';
 import Footer from './component/Footer';
 import Form from './Form'
-import { useAuthContext } from "./hooks/useAuthContext";
+// import StudentContextWrapper from './component/StudentWrapperC.js'
+import { useAuthContext } from "./hooks/useAuthContext.js";
 
 
 const App = ()=>{
@@ -29,6 +30,7 @@ const App = ()=>{
     <Route path='/about' element={<About/>} />
     <Route path='/user' element={<User/>} />
     <Route path='/login' element={<Login/>} />
+    {/* <StudentContextWrapper/> */}
     </Routes>
     {user && (
       <Footer/>

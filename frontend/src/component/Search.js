@@ -1,12 +1,14 @@
-import {React, useState,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import "./Search.css";
-
 import { Link } from "react-router-dom";
-import SearchCard from './searchCard'
-
+import SearchCard from "./searchCard";
+import Pagination from "@mui/material/Pagination";
+import Stack from "@mui/material/Stack";
 
 const Search = (props) => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [page, setPage] = useState(1);
+  const studentsPerPage = 10;
 
   useEffect(() => {
     const handleResize = () => {
@@ -23,57 +25,67 @@ const Search = (props) => {
   const timingf = props.filteredData.timing;
   const subjectf = props.filteredData.subject;
   const topicf = props.filteredData.topic;
-  const data=props.any
-  const isTeachingf=props.isTeaching
+  const data = props.any;
+  const isTeachingf = props.isTeaching;
 
-  
+  const handleChangePage = (event, value) => {
+    setPage(value);
+  };
+
   return (
-   <>
+    <>
       {/* Check the window width and render the appropriate component */}
       {windowWidth <= 700 ? (
-        <div className='mui-card-div'>
-{/* for small screen */}
-          <SearchCard 
-          timingf={timingf}
-          data={data}
-          subjectf={subjectf}
-          topicf={topicf}
-          isTeachingf={isTeachingf}
-          name='Name'
-          subject='Subject'
-          topic='Topic'
-          timing='Timing'
-          likes='Likes:'
-          occupation='Occupation'
-          impression='Impression'
+        <div className="mui-card-div">
+          {/* for small screen */}
+          <SearchCard
+            timingf={timingf}
+            data={data}
+            subjectf={subjectf}
+            topicf={topicf}
+            isTeachingf={isTeachingf}
+            name="Name"
+            subject="Subject"
+            topic="Topic"
+            timing="Timing"
+            likes="Likes:"
+            occupation="Occupation"
+            impression="Impression"
           />
         </div>
       ) : (
-        // Render your existing component for larger screens
-        data
-          .filter((user) => {
-            const timing = isTeachingf ? user.LTiming : user.TTiming;
-            const subjects = isTeachingf
-              ? user.LSubject
-              : user.TSubject;
-            const topics = isTeachingf ? user.LTopic : user.TTopic;
+        // Render your existing component for larger screens with pagination
+        <>
+          {data
+            .filter((user) => {
+              const timing = isTeachingf ? user.LTiming : user.TTiming;
+              const subjects = isTeachingf
+                ? user.LSubject
+                : user.TSubject;
+              const topics = isTeachingf ? user.LTopic : user.TTopic;
 
-            if (timingf === "" && subjectf === "" && topicf === "") {
-              return true;
-            } else if (
-              timing.toLowerCase().includes(timingf) &&
-              subjects.some((subject) =>
-                subject.toLowerCase().includes(subjectf)
-              ) &&
-              topics.some((topic) => topic.toLowerCase().includes(topicf))
-            ) {
-              return true;
-            }
+              if (timingf === "" && subjectf === "" && topicf === "") {
+                return true;
+              } else if (
+                timing.toLowerCase().includes(timingf) &&
+                subjects.some((subject) =>
+                  subject.toLowerCase().includes(subjectf)
+                ) &&
+                topics.some((topic) =>
+                  topic.toLowerCase().includes(topicf)
+                )
+              ) {
+                return true;
+              }
 
-            return false;
-          })
-          .map((user, key) => (
-            <div className="total" key={key}>
+              return false;
+            })
+            .slice((page - 1) * studentsPerPage, page * studentsPerPage)
+            .map((user, key) => (
+              // Your card component here
+              <div className="total" key={key}>
+                {/* Card content here */}
+
               <div className="info">
               <div className="image-div">
             <img
@@ -123,8 +135,17 @@ const Search = (props) => {
               <li className="imp2">
                 {props.impression}: {user.Impression}
               </li>
-            </div>
-          ))
+
+              </div>
+            ))}
+          <Stack spacing={2} sx={{ justifyContent: "center", mt: 2 }}>
+            <Pagination
+              count={Math.ceil(data.length / studentsPerPage)}
+              color="primary"
+              onChange={handleChangePage}
+            />
+          </Stack>
+        </>
       )}
     </>
   );

@@ -1,7 +1,17 @@
 import React from "react";
 import "./Form.css";
 import { useSignup } from "./hooks/useSignup";
-import { Link } from "react-router-dom";
+
+import student1 from './assets/student1.jpeg'
+import teach1 from './assets/teaching1.jpeg'
+import siginup2 from './assets/siginup2.jpeg'
+import siginup1 from './assets/signup1.jpeg'
+import teach2 from './assets/impress1.jpeg'
+
+import CssBaseline from '@mui/material/CssBaseline';
+import Paper from '@mui/material/Paper';
+import Grid from '@mui/material/Grid';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 import TextField from '@mui/material/TextField';
 import { useState} from "react";
 import { useAuthContext } from "./hooks/useAuthContext";
@@ -18,14 +28,10 @@ import {years} from './data/year'
 import { useEffect } from "react";
 import Box from '@mui/material/Box';
 import { useNavigate } from "react-router-dom";
-
 import { useStudentContext } from "./hooks/useStudentContext";
 
 function Form() {
-
   const{dispatch}=useStudentContext()
- 
-
   const [page, setPage]= useState(0);
   const navigate = useNavigate();
   const { signup, isLoading, errors } = useSignup();//
@@ -60,6 +66,16 @@ function Form() {
   const [password, setPassword] = useState("");
   // console.log(password)
   const [showSignup, setShowSignup] = useState(false);
+
+  const defaultTheme = createTheme();
+
+  const backgroundImages = {
+    0:siginup1,
+    1: siginup2,
+    2: student1,
+    3: teach1,
+    4:teach2,
+  };
 
   const handleSumbitSignup = async (f) => {
     f.preventDefault();
@@ -158,11 +174,10 @@ function Form() {
         return (
             <>
               <div className="signup_form">
-
                 <form className="signup" onSubmit={handleSumbitSignup}>
                 {/* <div className="signup_form_inner"> */}
                   <h1>Register</h1>
-                <Box
+                  <Box
                     component="form"
                     sx={{
                       '& > :not(style)': { m: 1, },
@@ -180,34 +195,24 @@ function Form() {
                       noValidate
                       autoComplete="off"
                       >
-
-                          <TextField id="outlined-basic-email" label="Email" variant='filled'  type="email"
-                          onChange={(f) => setEmail(f.target.value)}
-                          value={email}/>
-                        
-                          <TextField id="outlined-basic-pass" className="pass_field" label="Password" variant='filled'  type="password"
-                          onChange={(f) => setPassword(f.target.value)}
-                          value={password} />
-
+                        <TextField id="outlined-basic-email" label="Email" variant='filled'  type="email"
+                        onChange={(f) => setEmail(f.target.value)}
+                        value={email}/>
+                        <TextField id="outlined-basic-pass" className="pass_field" label="Password" variant='filled'  type="password"
+                        onChange={(f) => setPassword(f.target.value)}
+                        value={password} />
                     </Stack>
-
-                    
                     </div>
-                    
                 </Box>
                 <div className="register_btn">
-
                   <button className="smit redirect" disabled={isLoading}>
                     {" "}
                     {user ? "Register Done" : "Register"}{" "}
                   </button>
                   {errors && <div>{errors}</div>}
-
                 </div>
                 {/* </div> */}
                 </form>
- 
-
               </div>
             </>
         )
@@ -222,35 +227,28 @@ function Form() {
               <h1>User info</h1>
               <Stack
                 component="form"
-                
                 spacing={2}
                 noValidate
                 autoComplete="off"
               >
-
               <TextField id="outlined-basic-name" label="Name" variant="filled"   type="text"
                 onChange={(e) => setName(e.target.value)}
                 value={Name}  />
-              
               <TextField id="outlined-basic-name" label="email" variant="filled"   type="text" InputProps={{readOnly: true,}}
               value={user.user.email}  />
-
               <TextField id="outlined-basic-name" label="Occupation" variant="filled"   type="text"
                 onChange={(e) => setOccupation(e.target.value)}
                 value={Occupation}  />
-
               </Stack>
               <div className="user-data">
-                
                 <label className="L">Image: </label>
                 <input
-                 
+                  className="image-input"
                   type="file"
                   onChange={(e) => handleFileUpload(e)}
                   accept="image/*"//
                 />
               </div>      
-              
               <Autocomplete
                   disablePortal
                   id="combo-box-demo"
@@ -264,24 +262,18 @@ function Form() {
                   }}
                   renderInput={(params) => <TextField {...params} variant='filled' label="Year of birth" />}
                 />
-
               </div>
-
             </div>
             </>
           )
       }
-
-            
 
 
     else if (page===2){
         return(
             <>
             <div className="learn_form">
-
             <div className="learn_form_inner">
-
             <h1>As a Learner: What would you like to Learn</h1>
             <Stack spacing={3}>
       
@@ -290,15 +282,10 @@ function Form() {
                     id="tags-outlined-learn"
                     options={subject}
                     getOptionLabel={(option) => option.subject}
-                    
                     filterSelectedOptions
                     value={LSubject}
                     onChange={(event, selectedOptions) => {
-                      // Set the selected value using setLTopic
                       setLSubject(selectedOptions)
-                    
-                      // const Lern= selectedOptions.map(item => `'${item.subject}'`).join(', ')
-                     
                     }}
                     renderInput={(params) => (
                     <TextField
@@ -309,8 +296,6 @@ function Form() {
                     />
                     )}
                 /> 
-               
-
                 <Autocomplete
                     multiple
                     id="tags-outlined"
@@ -319,11 +304,7 @@ function Form() {
                     filterSelectedOptions
                     value={LTopic}
                     onChange={(event, selectedOptions) => {
-                      // Set the selected value using setLTopic
                       setLTopic(selectedOptions)
-                    
-                      // const Lern= selectedOptions.map(item => `'${item.subject}'`).join(', ')
-                     
                     }}
                     renderInput={(params) => (
                         <TextField
@@ -346,9 +327,7 @@ function Form() {
                 />
             </LocalizationProvider>
               </Stack>
-
             </div>
-
             </div>
             </>
         )
@@ -357,12 +336,9 @@ function Form() {
         return(
             <>
             <div className="learn_form">
-
             <div className="learn_form_inner">
-
             <h1>As a Teacher: What would you like to Teach</h1>
                 <Stack spacing={3}>
-      
                 <Autocomplete
                     multiple
                     id="tags-outlined-learn"
@@ -371,11 +347,7 @@ function Form() {
                     filterSelectedOptions
                     value={TSubject}
                     onChange={(event, selectedOptions) => {
-                      // Set the selected value using setTSubject
                       setTSubject(selectedOptions);
-
-                      // Console log the selected value
-                      // console.log("teach:",selectedOptions.map((option) => option.subject));
                     }}
                     renderInput={(params) => (
                       <TextField
@@ -395,11 +367,8 @@ function Form() {
                     filterSelectedOptions
                     value={TTopic}
                     onChange={(event, selectedOptions) => {
-                      // Set the selected value using setLTopic
                       setTTopic(selectedOptions);
                   
-                      // Console log the selected value
-                      // console.log("Tlearn: ",selectedOptions.map((option) => option.Chapter));
                     }}
                     renderInput={(params) => (
                         <TextField
@@ -420,12 +389,9 @@ function Form() {
                   console.log("Test T onChange: ",TTiming)
                 }}
                 />
-            </LocalizationProvider>
-
-             </Stack>
-
+              </LocalizationProvider>
+              </Stack>
               </div>
-
               </div>
             </>
         )
@@ -434,61 +400,83 @@ function Form() {
         return(
             <>
             <div className="impression_outer">
-
             <div className="impression border">
-                  {/* <h1> About you</h1> */}
-
-                <h3>
-                   
-                        Impression:
+            <h1>Impression</h1>
+                <TextField  className='textmui' id="standard-textarea" multiline label="tell us about your self"  variant="standard" rows={4}  value={Impression}
+                        onChange={(e) => setImpression(e.target.value)}/>
+                        {/* Impression:
                         <textarea  className='impress-text input-info' type='text' placeholder='tell us about your self'
                         value={Impression}
                         onChange={(e) => setImpression(e.target.value)}
-                        ></textarea >
-                   
-                </h3>
+                        ></textarea > */}
+
                 {error && <div className="error">{error}</div>}
                 <button className="addme" disabled={isSubmitting} onClick={handleSumbit}>Add me</button>
-
             </div>
-
             </div>
-
             </>
         )
     }
 }
 
 
+const backgroundImage = backgroundImages[page];
 return (
-  <div className='switch' style={{ minHeight: "80vh" }}>
-      <div className='container'>
-          <div className='body'>{PageDisplay()}</div>
-          <div className='buttons'>
+  <ThemeProvider theme={defaultTheme}>
+  <Grid container component="main" sx={{ height: '100vh' }}>
+    <CssBaseline />
+    <Grid
+      item
+      xs={false}
+      sm={4}
+      md={7}
+      sx={{
+        display: { xs: 'none', sm: 'block' },
+        backgroundImage: `url(${backgroundImage})`,
+        backgroundRepeat: 'no-repeat',
+        backgroundColor: (t) =>
+          t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+      }}
+    />
+    <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+      <Box
+        sx={{
+          my: 8,
+          mx: 4,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+        }}
+      >
+        {PageDisplay()}
+        <div className='buttons'>
           <Stack spacing={2} direction="row">
-
-              <Button variant="contained" 
+            <Button variant="contained"
               className="pre"
-              disabled={page === 1 || page===0}
-              onClick={()=>{
-                  setPage((currPage)=> currPage-1);
+              disabled={page === 1 || page === 0}
+              onClick={() => {
+                setPage((currPage) => currPage - 1);
               }}
-              >previous</Button>
-              <Button variant="contained" 
-              disabled={page === 4 || page===0}
-              onClick={()=>{
-                  setPage((currPage)=> currPage+1);
+            >Previous</Button>
+            <Button variant="contained"
+              disabled={page === 4 || page === 0}
+              onClick={() => {
+                setPage((currPage) => currPage + 1);
               }}
-              >Next</Button>
-
+            >Next</Button>
           </Stack>
-          </div>
-      </div>
-  </div>
-)
+        </div>
+      </Box>
+    </Grid>
+  </Grid>
+</ThemeProvider>
 
-  
+);
 }
+
+
 
 export default Form;
 

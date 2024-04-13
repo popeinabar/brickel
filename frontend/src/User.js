@@ -1,77 +1,120 @@
 import React, {useState,useEffect} from 'react'
 import './User.css'
+import TextField from '@mui/material/TextField';
 import ToggleButton from './component/toggle'
 import { useAuthContext } from './hooks/useAuthContext'
 import { useStudentContext } from './hooks/useStudentContext'
 const User = () => {
   const pen ="https://res.cloudinary.com/dvk41mh9f/image/upload/v1685013773/products/pen_low_cinj75.png"
-  const [isEditable, setIsEditable] = useState(true);
-  const [isOccuEditable, setIsOccuEditable] = useState(true);
-  const [isImpEditable, setIsImpuEditable] = useState(true);
-  const {user}= useAuthContext()
-//   console.log( `value of user ${user}`)
+  // const [isEditable, setIsEditable] = useState(true);
+  // const [isOccuEditable, setIsOccuEditable] = useState(true);
+  // const [isImpEditable, setIsImpuEditable] = useState(true);
 
-  const {students}= useStudentContext()
-  console.log(students)
-  
-  console.log(students?.Email+ " this is students email")
-  console.log("this is user "+user?.user?.email)
-  
+  const { user } = useAuthContext();
+  const { students,dispatch } = useStudentContext();
+  let currentUser;
   const userDocEmail=user?.user?.email;
+  
+  if (students) {
+    students.map((student) => {
+      if (student.Email === userDocEmail) {
+        currentUser = student;
+        console.log("user found")
+      }
+    }); 
+  }else{
+    console.log('user not found')
+  }
+  
+  console.log(currentUser?.Email+ " this is students email")
+  
 
-let currentUser;
 
-// Use array methods like find to search for the current user
-if (students) {
-  students.map((student) => {
-    if (student.Email === userDocEmail) {
-      currentUser = student;
-      console.log("user found")
-    }
-  });
-}else{
-  console.log('user not found')
+
+  const [EditedName, setEditedName] = useState('');
+console.log(currentUser?.Name)
+
+
+  const [Editedimpress, setEditedimpress] = useState('');
+  // console.log(Editedimpress)
+  const [EditOcc, setEditOcc] = useState('');
+  const [Email, setEmail]=useState('')
+  const [Dob, setDob]=useState('')
+
+  const [EditLearnTiming,setEditLearnTiming]=useState('')
+  const [EditLearnTopic,setEditLearnTopic]=useState('')
+  const [EditLearnSubject,setEditLearnSubject]=useState('')
+  
+  const [EditTeachTiming,setEditTeachTiming]=useState('')
+  const [EditTeachTopic,setEditTeachTopic]=useState('')
+  const [EditTeachSubject,setEditTeachSubject]=useState('')
+  const [EditImage,setEditImage]=useState('')
+
+  useEffect(() => {
+if(currentUser!=null){
+  setEditedName(currentUser?.Name)
+  setEditedimpress(currentUser?.Impression)
+  setEditOcc(currentUser?.Occupation)
+  setEmail(currentUser?.Email)
+  setDob(currentUser?.DOB)
+  setEditLearnTiming(currentUser?.LTiming)
+  setEditLearnTopic(currentUser?.LTopic)
+  setEditLearnSubject(currentUser?.LSubject)
+  setEditTeachTiming(currentUser?.TTiming)
+  setEditTeachTopic(currentUser?.TTopic)
+  setEditTeachSubject(currentUser?.TSubject)
+  setEditImage(currentUser?.Image)
 }
 
-console.log( `value after comparision ${currentUser}`)
-
-   
-  const handlePenClick = () => {
-    console.log('clicked');
-    setIsEditable(!isEditable);
-    
-    
-  };
-
-  const handlePenClick2 = () => {
-    
-    setIsImpuEditable(!isImpEditable)
-  };
-  const handlePenClick3 = () => {
-    setIsOccuEditable(!isOccuEditable)
-    
-  };  
+  },[currentUser])
 
 
-  const handleClickOutside = (event) => {
-    const { target } = event;
-    const inputElement = document.querySelector('.input-info');
-    const penElement = document.querySelector('.pen');
-  
-    if (inputElement !== target && !penElement.contains(target)) {
-      inputElement.readOnly = true;
-      setIsEditable(true);
-      // setIsOccuEditable(true)
+
+
+// Use array methods like find to search for the current user
+const handleUpdate = async () => {
+  try {
+    const response = await fetch(process.env.REACT_APP_API_URL + "/api/user/"+currentUser._id, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${user.token}`
+      },
+      body: JSON.stringify({
+        Name: EditedName,
+        Occupation: EditOcc,
+        Impression: Editedimpress,
+        LTiming:EditLearnTiming,
+        LSubject:EditLearnSubject,
+        LTopic:EditLearnTopic,
+        TSubject:EditTeachSubject,
+        TTopic:EditTeachTopic,
+        TTiming:EditTeachTiming,
+      })
+    });
+    if (response.ok) {
+      const json = await response.json(); 
+      console.log("data after update "+json)
+      // Update local state with the edited values
+      dispatch({ type: 'UPDATE_STUDENTS', payload: json });
+      // Optionally, reset input fields
+      setEditedName('');
+      setEditedimpress('');
+      setEditOcc('');
+      setEditLearnTiming('')
+      setEditLearnTopic('')
+      setEditLearnSubject('')
+      setEditTeachTiming('')
+      setEditTeachTopic('')
+      setEditTeachSubject('')
+    } else {
+      // Handle errors
+      console.error('Failed to update user information');
     }
-  };
-  
-  useEffect(() => {
-    document.addEventListener('click', handleClickOutside);
-    return () => {
-      document.removeEventListener('click', handleClickOutside);
-    };
-  }, []);
-  
+  } catch (error) {
+    console.error('Error updating user information:', error);
+  }
+};
 
   
 
@@ -80,80 +123,54 @@ console.log( `value after comparision ${currentUser}`)
       <div className='user'>
         <div className='userinfo-1'>
           <div className='user-img-div'>
-            <img className='image-info' src={"https://res.cloudinary.com/dvk41mh9f/image/upload/v1683527111/products/cwkjcrltybyquoecpanp.jpg"} alt='lerner-tutor'></img>
+            <img className='image-info' src={EditImage.url} alt='lerner-tutor'></img>
           </div>
           <div className='row1'>
-              <div className='user-name border' >
-                <h3>
-                  Name:
-                  <input
-                    className='input-info'
-                    type='text'
-                    placeholder='Name'
-                    defaultValue={currentUser?.Name}
-                    readOnly={isEditable}
-                    // onBlur={handleInputBlur}
-                  ></input>
-                  <img
-                    className='pen'
-                    src={pen}
-                    alt='pen'
-                    onClick={handlePenClick}
-                  />
-                </h3>
-              </div>
-            <div className='user-email border' >
-              {user && (
+            <div className='border'>
 
-                
-              <h3>
-                E-Mail:<input type="text" className='email-input input-info'  readOnly value={user?.user?.email} />
-              </h3>
-              )}
+          <TextField className='textmui' id="filled-basic" label="Filled" variant="filled" value={EditedName} onChange={(e) => setEditedName(e.target.value)}/>
+            </div>
+
+             
+            <div className='user-email border' >
+            <TextField className='textmui' id="filled-basic" label="Filled" variant="filled" value={Email} />
+
             </div>
             <div className='user-dob border' >
-              <h3>
-                DOB:<input type="text" className='dob-input input-info'  readOnly value={currentUser?.DOB.label} />
-              </h3>
+            <TextField className='textmui' id="filled-basic" label="Filled" variant="filled" value={Dob} />
+
             </div>
           </div>
           <div className='row2'>
-          <div className='user-name border' >
-                <h3>
-                  Occupation:
-                  <input
-                    className='input-info'
-                    type='text'
-                    placeholder='Occupation'
-                    defaultValue={'teacher'}
-                    readOnly={isOccuEditable}
-                    // onBlur={handleInputBlur}
-                  ></input>
-                  <img
-                    className='pen'
-                    src={pen}
-                    alt='pen'
-                    onClick={handlePenClick3}
-                  />
-                </h3>
+            <div className='border' >
+            
+                  <TextField className='textmui' id="filled-basic" label="Occupation" variant="filled" value={EditOcc} 
+                    onChange={(e) => setEditOcc(e.target.value)} />
+
               </div>
-            <div className='user-impress border' >
-              <h3 >
-                Impression:
-                <textarea  className='impress-text input-info' type='text' placeholder='tell us about your self'
-                            readOnly={isImpEditable} ></textarea >
-                  <img  
-                            className='pen'
-                            // onClick={() => setButtonPopup(true)}
-                            src={pen}
-                            alt='pen'
-                            onClick={handlePenClick2}
-                  />
-                </h3>
+            <div className='border' >
+              
+              <TextField  className='textmui' id="standard-textarea" multiline label="Impression"  variant="standard" rows={4} value={Editedimpress} onChange={(e) => setEditedimpress(e.target.value)}/>
+             
             </div>
+        {/* <button className='logout' onClick={handleUpdate}>update</button> */}
           </div>
         </div>
-        <ToggleButton/>
+        <ToggleButton
+          EditLearnTiming={EditLearnTiming}
+          setEditLearnTiming={setEditLearnTiming}
+          EditLearnSubject={EditLearnSubject}
+          setEditLearnSubject={setEditLearnSubject}
+          EditLearnTopic={EditLearnTopic}
+          setEditLearnTopic={setEditLearnTopic}
+          EditTeachTiming={EditTeachTiming}
+          setEditTeachTiming={setEditTeachTiming}
+          EditTeachTopic={EditTeachTopic}
+          setEditTeachTopic={setEditTeachTopic}
+          EditTeachSubject={EditTeachSubject}
+          setEditTeachSubject={setEditTeachSubject}
+          handleUpdate={handleUpdate}
+        />
       </div>
     
     </>

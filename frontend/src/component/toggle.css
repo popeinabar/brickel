@@ -1,12 +1,11 @@
 .toggle{
     display: flex;
-    /* justify-content: s   pace-around; */
-    /* align-items: center; */
-
 }
+
 .logout{
     border: 2px black;
     padding: 6px 10px;
+    margin-left:30px ;
     border-radius: 2px;
     cursor: pointer;
 }
@@ -26,13 +25,40 @@
 
 }
 .toggle-div1{
-    padding: 3vw;}
+    width: min-content;
+}
+
 .toggle-div2{
     padding-top: 3vw;
 
     padding-left: 23vw;
 }
-
+.user-function{
+    display: flex;
+    padding: 15px;
+}
+.toggle-time{
+    display: flex;
+    justify-content: space-between;
+}
+.toggle-sub{
+    display: flex;
+    padding: 20px 0px;
+    justify-content: space-between;
+}
+.toggle-topic{
+    display: flex;
+    justify-content: space-between;
+}
+.value{
+    padding-right: 30px;
+}
+.timepicker{
+    width: 165px;
+}
+.autocomplete{
+    width: 330px;
+}
 @media (max-width:660px) {
     .toggle{
         display: flex;
@@ -40,6 +66,9 @@
     }
     .toggle-div2 {
         padding-left: 3vh;
+    }
+    .toggle-div1 {
+        width: 100%;
     }
     .style{
         display: flex;
@@ -50,6 +79,11 @@
     }
     .style button{
         margin: 0;
+    }
+    .user-function{
+        align-items: center;
+        display: flex;
+        flex-direction: column;
     }
 
 }

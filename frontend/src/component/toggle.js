@@ -10,6 +10,15 @@ import { alpha, styled } from '@mui/material/styles';
 import { brown } from '@mui/material/colors';
 import { useLogout } from '../hooks/useLogout';
 import { useAuthContext } from '../hooks/useAuthContext'
+import Autocomplete from '@mui/material/Autocomplete';
+import TextField from '@mui/material/TextField';
+import { subject } from '../data/data';
+import { chapters } from '../data/chapter';
+import {  MobileTimePicker } from '@mui/x-date-pickers';
+import { LocalizationProvider } from '@mui/x-date-pickers';
+
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import dayjs from 'dayjs';
 
 const BrownSwitch = styled(Switch)(({ theme }) => ({
   '& .MuiSwitch-switchBase.Mui-checked': {
@@ -30,10 +39,14 @@ const label = { inputProps: { 'aria-label': 'Color switch demo' } };
 
 
 
-function ToggleButton() {
+function ToggleButton(props) {
+// console.log(props.EditLearnTopic);
+
+console.log(props.EditLearnTiming);
 
     function LearnOption(){
         return(
+          
             <>
                 <div className='toggle'>
                     <div className='style'>
@@ -55,9 +68,62 @@ function ToggleButton() {
                      />
                     </div>
                     <div className='toggle-div1'>
-                        <h5>Timing:</h5>
-                        <h5>Subject:</h5>
-                        <h5>topic:</h5>
+                        <div className='toggle-time'>
+
+                          <h5 className='value'>Timing:</h5>
+                            <LocalizationProvider dateAdapter={AdapterDayjs}>
+                              <MobileTimePicker
+                              className='timepicker'
+                                value={dayjs(`2022-04-17T${props.EditLearnTiming}`)}
+                                onChange={(date) => {
+                                  const time = dayjs(date).format('HH:mm');
+                                  props.setEditLearnTiming(time);
+                                }}
+                              />
+                            </LocalizationProvider>
+
+                             </div>
+                                <div className='toggle-sub'>
+                                <h5 className='value'>Subject:</h5>
+                                <Autocomplete
+                                  className='autocomplete'
+                                  multiple
+                                  id="tags-standard"
+                                  options={subject}
+                                  getOptionLabel={(option) => option.subject}//check this
+                                  defaultValue={props.EditLearnSubject || []} 
+                                  onChange={(event, selectedOptions) => {props.setEditLearnSubject(selectedOptions)}}
+                                  renderInput={(params) => (
+                                    <TextField
+                                      {...params}
+                                      variant="standard"
+                                      label="Subject to Learn"
+                                      placeholder="Select Subject"
+                                    />
+                                  )}
+                                />
+                                </div>
+                                  <div className='toggle-topic'>
+                                  <h5 className='value'>topic:</h5>
+                                  <Autocomplete
+                                  className='autocomplete'
+                                    multiple
+                                    id="tags-standard"
+                                    options={chapters}
+                                    getOptionLabel={(option) => option.Chapter}
+                                    defaultValue={props.EditLearnTopic || []}
+                                    onChange={(event, selectedOptions) => {props.setEditLearnTopic(selectedOptions)}}
+                                    renderInput={(params) => (
+                                    <TextField
+                                      {...params}
+                                      variant="standard"
+                                      label="Multiple values"
+                                      placeholder="Favorites"
+                                    />
+                                    )}
+                                  />
+
+                        </div>
                     </div>
                     {/* <div className='toggle-div2'>
                         <h5>Likes:</h5>
@@ -96,9 +162,66 @@ function ToggleButton() {
                   />
                     </div>
                     <div className='toggle-div1'>
-                        <h5>Timing:</h5>
-                        <h5>Subject:</h5>
-                        <h5>topic:</h5>
+                      <div className='toggle-time'>
+                      <h5 className='value'>Timing:</h5>
+                        <LocalizationProvider dateAdapter={AdapterDayjs}>
+                          <MobileTimePicker
+                           sx={{
+                           
+                         }}
+                          className='timepicker'
+                            value={dayjs(`2022-04-17T${props.EditTeachTiming}`)}
+                            onChange={(date) => {
+                              const time = dayjs(date).format('HH:mm');
+                              props.setEditTeachTiming(time);
+                              
+                            }}
+                          />
+                        </LocalizationProvider>
+                      </div>
+                            <div className='toggle-sub'>
+                              <h5 className='value'>Subject:</h5>
+                              <Autocomplete
+                                multiple
+                                className='autocomplete'
+                                id="tags-standard"
+                                options={subject}
+                                getOptionLabel={(option) => option.subject}//check this
+                                defaultValue={props.EditTeachSubject || []} 
+                                onChange={(event, selectedOptions) => {props.setEditTeachSubject(selectedOptions)}}
+                                renderInput={(params) => (
+                                  <TextField
+                                    {...params}
+                                    variant="standard"
+                                    label="Subject to Teach"
+                                    placeholder="Select Subject"
+                                  />
+                                )}
+                              />
+                            </div>
+
+                        <div className='toggle-topic'>
+                        <h5 className='value'>topic:</h5>
+                        <Autocomplete
+                          multiple
+                          id="tags-standard"
+                          className='autocomplete'
+                          options={chapters}
+                          getOptionLabel={(option) => option.Chapter}
+                          defaultValue={props.EditTeachTopic || []}
+                          onChange={(event, selectedOptions) => {props.setEditTeachTopic(selectedOptions)}}
+                          renderInput={(params) => (
+                          <TextField
+                            {...params}
+                            variant="standard"
+                            label="Multiple values"
+                            placeholder="Favorites"
+                          />
+                        )}
+                        />
+
+                        </div>
+
                     </div>
                     
                     
@@ -121,23 +244,26 @@ function ToggleButton() {
     logout()
   }
   return (
-    <div>
     
+    <div>
+
+<div className='user-function'>
     <FormControlLabel control={<BrownSwitch {...label} defaultChecked onClick={handleClick} 
      /> } label={isOn ? 'As a TEACHER' : 'As a STUDENT'}/>
+    <div>
   {user && (
+    
     <Link to={'/login'}>
      <button onClick={handleLogout} className='logout' >Log Out</button>
      </Link>
   )}
-
-
-     {/* <button>Update</button> */}
-
-
+  <button className='logout' onClick={props.handleUpdate}>update</button>
+      </div>
+      </div>
       {isOn ? <LearnOption/> : <TeachOption/>}
+  </div>
+   
 
-    </div>
   );
 }
 

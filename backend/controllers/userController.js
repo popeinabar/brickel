@@ -87,20 +87,29 @@ const updateUser = async (req, res) => {
   const { id } = req.params;
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
-    return res.status(404).json({ error: "no such user" });
+    return res.status(404).json({ error: "No such user" });
   }
-  const user = await User.findOneAndUpdate(
-    { _id: id },
-    {
-      ...req.body,
-    }
-  );
 
-  if (!user) {
-    return res.status(404).json({ error: "no such dir found" });
+  try {
+    const newUser = await User.findByIdAndUpdate(
+      { _id: id },
+      { ...req.body },
+      { new: true } // Return the updated document
+    );
+    console.log("from backend",newUser)
+    if (!newUser) {
+      return res.status(404).json({ error: "No such user found" });
+    }
+
+    // Return the updated user data
+    res.status(200).json(newUser);
+  } catch (error) {
+    // Handle any errors that occur during the update process
+    console.error("Error updating user:", error);
+    res.status(500).json({ error: "Internal server error" });
   }
-  res.status(200).json(user);
 };
+
 
 module.exports = {
   getUsers,

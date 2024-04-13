@@ -1,10 +1,12 @@
-import React from 'react';
-import { AuthContextProvider } from './AuthContextProvider'; // Import AuthContextProvider
-import { StudentContext } from '../context/StudentContext';
+// import React from 'react';
+// // Import AuthContextProvider
+// import { StudentContext } from '../context/StudentContext';
 
 
-const StudentContextWrapper=()=>{
-    <AuthContextProvider>
-        <StudentContext/>
-    </AuthContextProvider>
-}
+//  const StudentContextWrapper=()=>{
+
+//         <StudentContext/>
+
+// }
+
+// export default StudentContextWrapper

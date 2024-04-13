@@ -1,11 +1,10 @@
 import React, { createContext, useReducer, useEffect } from "react";
 
-import { useAuthContext } from "../hooks/useAuthContext";
-
 export const StudentContext = createContext();
 
+const person=JSON.parse(localStorage.getItem('user'))
+console.log(person.token)
 export const studentReducer = (state, action) => {
- 
   switch (action.type) {
     case "SET_STUDENTS":
       return {
@@ -17,6 +16,13 @@ export const studentReducer = (state, action) => {
       return {
         ...state,
         students: [action.payload, ...state.students],
+      };
+    case 'UPDATE_STUDENTS':
+      return {
+        ...state,
+        students: state.students.map((student) =>
+          student._id === action.payload._id ? { ...student, ...action.payload } : student
+        ),
       };
     case "FETCH_BLOGS_START":
       return {
@@ -34,42 +40,43 @@ export const studentReducer = (state, action) => {
 };
 
 export const StudentContextProvider = ({ children }) => {
-
-    
-  const {user}=useAuthContext()
   const [state, dispatch] = useReducer(studentReducer, {
-    students: null,
+    students: [],
     loading: true,
   });
 
   useEffect(() => {
+    console.log('use effect ran outside api')
+
     const fetchData = async () => {
-      dispatch({ type: "FETCH_BLOGS_START" }); // Set loading to true before fetching
-      try {
-        const response = await fetch(process.env.REACT_APP_API_URL + "/api/user", {
-          headers: {
-            Authorization: `Bearer ${user.token}`,
-          },
-        });
-        const json = await response.json();
-        if (response.ok) {
-          dispatch({ type: "SET_STUDENTS", payload: json });
-        }
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      } finally {
-        dispatch({ type: "FETCH_BLOGS_END" }); // Set loading to false after fetching
+
+      console.log('api is called in student context')
+
+      const response = await fetch(process.env.REACT_APP_API_URL + "/api/user",{ headers:{
+        'Authorization': `Bearer ${person.token}`
+      }});
+
+      const students = await response.json();
+      
+      console.log(students)
+      if (response.ok) {
+        console.log("after the respooince is ok",students)
+        dispatch({ type: "SET_STUDENTS", payload: students });
       }
     };
-    
-    // Fetch data when component mounts
-    fetchData();
-  }, []);
+    // Fetch data when component mounts and every time it updates
+    if(person){
+      fetchData();
 
+    }
+  }, [dispatch,person]);
+
+
+
+console.log('student context: ',state)
   return (
     <StudentContext.Provider value={{ ...state, dispatch }}>
       {children}
     </StudentContext.Provider>
   );
-  
 };

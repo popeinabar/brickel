@@ -1,26 +1,24 @@
 *{
-    padding: 0;
-    
+    padding: 0;    
 }
 .logowhite{
     top:20px;
     height: 30px;
     width: 250px;
     display: block;
+    padding-left: 30px;
 }
 .logo-small {
   display: none;
 }
 nav.navbar{
-  width: 95vw;
+  width: 100vw;
 }
 .navbar {
   
   position:fixed;
   top: 0;
     padding-top: 15px;
-    padding-left: 80px;
-    padding-right: 80px;
     display: flex;
     justify-content:space-between;
     align-items: center;

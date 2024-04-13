@@ -17,9 +17,9 @@ const Teach = () => {
   const [ loading, setLoading] = useState(true)
 
   useEffect(() => {
-    console.log("inside use effect but outside fetch data")
+
     const fetchData = async () => {
-      console.log('api is called')
+      console.log('api is called in teach')
       const response = await fetch(process.env.REACT_APP_API_URL + "/api/user",{
           headers:{
             'Authorization': `Bearer ${user.token}`
@@ -28,7 +28,6 @@ const Teach = () => {
       const json = await response.json(); 
 
       if (response.ok) {
-        
         dispatch({type:'SET_STUDENTS', payload:json})
         setTimeout(()=>{
           setLoading(false)
@@ -44,6 +43,8 @@ const Teach = () => {
     subject: "",
     topic: "",
   });
+
+
   return (
     <>
     {loading?(<div className="loder-div">

@@ -17,9 +17,9 @@ const Learn = () => {
   const [ loading, setLoading] = useState(true)
 
   useEffect(() => {
-    console.log("inside use effect but outside fetch data")
+
       const fetchData = async () => {
-console.log('api is called')
+console.log('api is called in learn')
         const response = await fetch(process.env.REACT_APP_API_URL+'/api/user',{
           headers:{
             'Authorization': `Bearer ${user.token}`
@@ -43,7 +43,7 @@ console.log('api is called')
       } 
     }, [dispatch,user]);
     
-    // console.log(students)
+
   
 
   

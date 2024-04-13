@@ -4,11 +4,11 @@
   display: flex;
    justify-content: center;
   align-items: center;
-  width: 100vw
+  width: 100% 
 }
+
 .learn_form_inner{
 
-  /* height: 55vh; */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     padding: 0px 40px 35px 40px;
     margin: 15px;
@@ -20,7 +20,7 @@
   flex-direction: column;
   display: flex;
   align-items: center;
-  /* width: 100vw */
+  /* width: 100% */
 }
 
 .pre{
@@ -43,6 +43,7 @@ margin-top: 50px;
   } 
   .user-data {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
     width: 100%;
@@ -66,36 +67,41 @@ margin-top: 50px;
     font-size: 1rem;
     cursor: pointer;
   }
-  
+
   .error {
     color: red;
     font-size: 0.9rem;
     text-align: center;
     margin-top: 10px;
   }
-
-  .impression{
-    height: 40vh;
-    width: 46vw;
+  .addme{
+    width: 100px;
+  }
+  .impression {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    
-  }
-  .addme{
-    width: 100px;
-  }
-  .impression h3{
-    display: flex;
-    
-    flex-direction: column;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    padding: 0px 40px 35px 40px;
+    margin: 15px;
 
   }
   .impression_outer{
     display: flex;
     align-items: center;
     justify-content: center;
+    height: 90%;
+    width: 100%;
+    margin-bottom: 10px;
   }
 
   
+  /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); */
+  
+  @media (max-width:684px) {
+
+    .image-input{
+      width: 100%;
+    }
+  }
