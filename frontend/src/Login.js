@@ -3,28 +3,24 @@ import './Login.css'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useLogin } from './hooks/useLogin'
+import LinearProgress from '@mui/material/LinearProgress';
 
 
 const Login = () => {
   
-
   const [email, setEmail]= useState('')
   const [password, setPassword]= useState('')
   const {login, errors, isLoading}= useLogin()
  
-
-
-
   const handleSumbitLogin= async(e)=>{
     e.preventDefault()
     await login(email, password)
-   
   }
-
 
   return (
    <>
    <div className='login'>
+   {isLoading && < LinearProgress/>}
         <div className='ext-right'>
             <p className='moto'>
 
@@ -38,9 +34,10 @@ const Login = () => {
               <input className='pass' type='password' placeholder='Password' onChange={(e)=> setPassword(e.target.value)} value={password}></input>
 
               {/* <Link to={'/home'}> */}
-                  <button className='Register' disabled={isLoading}>
-                    Login
-                  </button>
+              <button className='Register' disabled={isLoading}>
+                {isLoading ? 'Logging in...' : 'Login'}
+                
+              </button>
                   {errors && <div className='error'>{errors}</div>}
               {/* </Link>  */}
  

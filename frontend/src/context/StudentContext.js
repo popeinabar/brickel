@@ -3,7 +3,7 @@ import React, { createContext, useReducer, useEffect } from "react";
 export const StudentContext = createContext();
 
 const person=JSON.parse(localStorage.getItem('user'))
-console.log(person.token)
+
 export const studentReducer = (state, action) => {
   switch (action.type) {
     case "SET_STUDENTS":

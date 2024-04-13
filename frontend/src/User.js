@@ -1,5 +1,6 @@
 import React, {useState,useEffect} from 'react'
 import './User.css'
+import LinearProgress from '@mui/material/LinearProgress';
 import TextField from '@mui/material/TextField';
 import ToggleButton from './component/toggle'
 import { useAuthContext } from './hooks/useAuthContext'
@@ -10,8 +11,8 @@ const User = () => {
   // const [isOccuEditable, setIsOccuEditable] = useState(true);
   // const [isImpEditable, setIsImpuEditable] = useState(true);
 
-  const { user } = useAuthContext();
-  const { students,dispatch } = useStudentContext();
+  const { user,isLoading } = useAuthContext();
+  const { students,dispatch,loading } = useStudentContext();
   let currentUser;
   const userDocEmail=user?.user?.email;
   
@@ -117,10 +118,13 @@ const handleUpdate = async () => {
 };
 
   
-
+// console.log(`this is the loding state of student${loading}`)
+// console.log(`this is the loding state of user${isLoading}`)
   return (
     <>
       <div className='user'>
+      {loading && <LinearProgress/>}
+     
         <div className='userinfo-1'>
           <div className='user-img-div'>
             <img className='image-info' src={EditImage.url} alt='lerner-tutor'></img>

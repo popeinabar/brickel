@@ -7,6 +7,7 @@ import teach1 from './assets/teaching1.jpeg'
 import siginup2 from './assets/siginup2.jpeg'
 import siginup1 from './assets/signup1.jpeg'
 import teach2 from './assets/impress1.jpeg'
+import LinearProgress from '@mui/material/LinearProgress';
 
 import CssBaseline from '@mui/material/CssBaseline';
 import Paper from '@mui/material/Paper';
@@ -31,7 +32,7 @@ import { useNavigate } from "react-router-dom";
 import { useStudentContext } from "./hooks/useStudentContext";
 
 function Form() {
-  const{dispatch}=useStudentContext()
+  const{dispatch,loading}=useStudentContext()
   const [page, setPage]= useState(0);
   const navigate = useNavigate();
   const { signup, isLoading, errors } = useSignup();//
@@ -335,6 +336,7 @@ function Form() {
     else if(page===3){
         return(
             <>
+            
             <div className="learn_form">
             <div className="learn_form_inner">
             <h1>As a Teacher: What would you like to Teach</h1>
@@ -423,6 +425,8 @@ function Form() {
 const backgroundImage = backgroundImages[page];
 return (
   <ThemeProvider theme={defaultTheme}>
+    {isLoading && <LinearProgress/>}
+    {/* {loading && <LinearProgress/>} */}
   <Grid container component="main" sx={{ height: '100vh' }}>
     <CssBaseline />
     <Grid

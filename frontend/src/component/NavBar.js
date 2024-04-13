@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import './NavBar.css';
 import { Link } from 'react-router-dom';
-
+// import { useAuthContext } from '../hooks/useAuthContext';
 function NavBar() {
-  
+  // const {user} = useAuthContext()
 return (
     <nav className='navbar'>
       <div className="navbar-left">
@@ -15,11 +15,7 @@ return (
       </div>
       <div className="navbar-right">
         
-          <div className='style'>
-          <Link className='from-home' to={"/login"}>
-         LOGIN
-          </Link>
-          </div>
+          
           <div className='style'>
           <Link  className='from-home' to={'/home'}>
           HOME

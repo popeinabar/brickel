@@ -1,4 +1,4 @@
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes,Navigate } from 'react-router-dom';
 import Home from './Home';
 import Learn from './Learn';
 import About from './About';
@@ -22,14 +22,15 @@ const App = ()=>{
     <NavBar/>
   )}
     <Routes>
-    <Route path='/' element={<Login/>} />
-    <Route path='/form' element={<Form/>} />
-    <Route path='/home' element={<Home/>} />
-    <Route path='/learn' element={<Learn/>} />
-    <Route path='/teach' element={<Teach/>} />
-    <Route path='/about' element={<About/>} />
-    <Route path='/user' element={<User/>} />
-    <Route path='/login' element={<Login/>} />
+    
+    <Route path='/form'  element={<Form/>} />
+    <Route path='/home'  element={user ? <Home />: <Navigate to='/login'/>} />
+    <Route path='/learn'  element={user ? <Learn />: <Navigate to='/home'/>} />
+    <Route path='/teach' element={user ? <Teach />: <Navigate to='/home'/>} />
+    <Route path='/about' element={user ? <About />: <Navigate to='/home'/>} />
+    <Route path='/user' element={user ? <User />: <Navigate to='/home'/>} />
+    <Route path='/login' element={!user ? <Login />: <Navigate to='/home'/>}  />
+ 
     {/* <StudentContextWrapper/> */}
     </Routes>
     {user && (
