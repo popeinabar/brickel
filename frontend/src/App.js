@@ -22,7 +22,7 @@ const App = ()=>{
     <NavBar/>
   )}
     <Routes>
-    
+    <Route path='/'  element={user ? <Home />: <Navigate to='/login'/>}  />
     <Route path='/form'  element={<Form/>} />
     <Route path='/home'  element={user ? <Home />: <Navigate to='/login'/>} />
     <Route path='/learn'  element={user ? <Learn />: <Navigate to='/home'/>} />
