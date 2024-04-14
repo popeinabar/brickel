@@ -2,6 +2,12 @@
     margin-top: 47px;
     padding: 4vh;
 }
+.upate-success{
+    position: fixed;
+    right: 0;
+    transform: translateY((-100%));
+    width: 25%;
+}
 .logout{
     border: 2px black;
     padding: 6px 10px;

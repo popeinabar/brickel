@@ -5,11 +5,15 @@ import TextField from '@mui/material/TextField';
 import ToggleButton from './component/toggle'
 import { useAuthContext } from './hooks/useAuthContext'
 import { useStudentContext } from './hooks/useStudentContext'
+import Alert from '@mui/material/Alert';
+import CheckIcon from '@mui/icons-material/Check';
+import Slide from '@mui/material/Slide';
 const User = () => {
   const pen ="https://res.cloudinary.com/dvk41mh9f/image/upload/v1685013773/products/pen_low_cinj75.png"
   // const [isEditable, setIsEditable] = useState(true);
   // const [isOccuEditable, setIsOccuEditable] = useState(true);
   // const [isImpEditable, setIsImpuEditable] = useState(true);
+  const [showAlert, setShowAlert] = useState(false);
 
   const { user,isLoading } = useAuthContext();
   const { students,dispatch,loading } = useStudentContext();
@@ -108,6 +112,8 @@ const handleUpdate = async () => {
       setEditTeachTiming('')
       setEditTeachTopic('')
       setEditTeachSubject('')
+      setShowAlert(true);
+      setTimeout(() => setShowAlert(false), 5000);
     } else {
       // Handle errors
       console.error('Failed to update user information');
@@ -124,7 +130,14 @@ const handleUpdate = async () => {
     <>
       <div className='user'>
       {loading && <LinearProgress/>}
-     
+      {showAlert && (
+      <Slide direction="left" in={true} mountOnEnter unmountOnExit>
+        <Alert icon={<CheckIcon fontSize="inherit" />} className='upate-success' severity="success">
+          Update success!
+        </Alert>
+      </Slide>
+      )}
+
         <div className='userinfo-1'>
           <div className='user-img-div'>
             <img className='image-info' src={EditImage.url} alt='lerner-tutor'></img>
