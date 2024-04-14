@@ -23,7 +23,6 @@ const Login = () => {
    {isLoading && < LinearProgress/>}
         <div className='ext-right'>
             <p className='moto'>
-
               Brickel is a community-driven platform that enables the exchange of educational resources and services without the use of money, creating a more accessible and equitable way for people to access education.
             </p>
             <form className='login' onSubmit={handleSumbitLogin}>

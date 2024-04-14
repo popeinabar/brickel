@@ -70,7 +70,7 @@ console.log(props.EditLearnTiming);
                     <div className='toggle-div1'>
                         <div className='toggle-time'>
 
-                          <h5 className='value'>Timing:</h5>
+                          <h5 className='value'>Learning Time:</h5>
                             <LocalizationProvider dateAdapter={AdapterDayjs}>
                               <MobileTimePicker
                               className='timepicker'
@@ -104,7 +104,7 @@ console.log(props.EditLearnTiming);
                                 />
                                 </div>
                                   <div className='toggle-topic'>
-                                  <h5 className='value'>topic:</h5>
+                                  <h5 className='value'>Topic:</h5>
                                   <Autocomplete
                                   className='autocomplete'
                                     multiple
@@ -117,7 +117,7 @@ console.log(props.EditLearnTiming);
                                     <TextField
                                       {...params}
                                       variant="standard"
-                                      label="Multiple values"
+                                      label="Topic to Learn"
                                       placeholder="Favorites"
                                     />
                                     )}
@@ -163,7 +163,7 @@ console.log(props.EditLearnTiming);
                     </div>
                     <div className='toggle-div1'>
                       <div className='toggle-time'>
-                      <h5 className='value'>Timing:</h5>
+                      <h5 className='value'>Teaching Time:</h5>
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
                           <MobileTimePicker
                            sx={{
@@ -201,7 +201,7 @@ console.log(props.EditLearnTiming);
                             </div>
 
                         <div className='toggle-topic'>
-                        <h5 className='value'>topic:</h5>
+                        <h5 className='value'>Topic:</h5>
                         <Autocomplete
                           multiple
                           id="tags-standard"
@@ -214,7 +214,7 @@ console.log(props.EditLearnTiming);
                           <TextField
                             {...params}
                             variant="standard"
-                            label="Multiple values"
+                            label="Topic to Teach"
                             placeholder="Favorites"
                           />
                         )}
@@ -258,7 +258,7 @@ console.log(props.EditLearnTiming);
      <button onClick={handleLogout} className='logout' >Log Out</button>
      </Link>
   )}
-  <button className='logout' onClick={props.handleUpdate}>update</button>
+  <button className='logout' onClick={props.handleUpdate}>Update</button>
       </div>
       </div>
       {isOn ? <LearnOption/> : <TeachOption/>}

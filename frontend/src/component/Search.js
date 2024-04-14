@@ -138,7 +138,7 @@ const Search = (props) => {
 
               </div>
             ))}
-          <Stack spacing={2} sx={{ justifyContent: "center", mt: 2 }}>
+          <Stack spacing={2} sx={{ justifyContent: "center", mt: 2, alignItems:"center" }}>
             <Pagination
               count={Math.ceil(data.length / studentsPerPage)}
               color="primary"

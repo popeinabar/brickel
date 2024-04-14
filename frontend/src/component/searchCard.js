@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useState } from 'react';
 import { styled } from '@mui/material/styles';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
@@ -10,7 +11,9 @@ import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
+// import Pagination from "@mui/material/Pagination";
+// import Stack from "@mui/material/Stack";
+
 import "./Search.css";
 
 const ExpandMore = styled((props) => {
@@ -25,6 +28,8 @@ const ExpandMore = styled((props) => {
 }));
 
 export default function RecipeReviewCard(props) {
+  // const [page, setPage] = useState(1);
+  // const studentsPerPage = 10;
   const [expanded, setExpanded] = React.useState(false);
   const timingf = props.timingf;
   const subjectf = props.subjectf;
@@ -32,6 +37,9 @@ export default function RecipeReviewCard(props) {
   const data=props.data;
   const isTeachingf=props.isTeachingf;
 
+  // const handleChangePage = (event, value) => {
+  //   setPage(value);
+  // };
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
@@ -59,9 +67,10 @@ export default function RecipeReviewCard(props) {
 
       return false;
     })
+    // .slice((page - 1) * studentsPerPage, page * studentsPerPage)
     .map((user,key)=>(
       
-      <Card sx={{ maxWidth: 345 }} key={key} className='mui-card'>
+      <Card sx={{ margin:2, maxWidth:330, width:280 }} key={key} className='mui-card'>
       <CardHeader
         action={
           <IconButton aria-label="settings">
@@ -120,6 +129,14 @@ export default function RecipeReviewCard(props) {
           </Typography>
         </CardContent>
       </Collapse>
+      
+      {/* <Stack spacing={2} sx={{ justifyContent: "center", mt: 2, alignItems:"center" }}>
+            <Pagination
+              count={Math.ceil(data.length / studentsPerPage)}
+              color="primary"
+              onChange={handleChangePage}
+            />
+          </Stack> */}
     </Card>
 
 

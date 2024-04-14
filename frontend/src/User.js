@@ -61,7 +61,7 @@ if(currentUser!=null){
   setEditedimpress(currentUser?.Impression)
   setEditOcc(currentUser?.Occupation)
   setEmail(currentUser?.Email)
-  setDob(currentUser?.DOB)
+  setDob(currentUser?.DOB.label)
   setEditLearnTiming(currentUser?.LTiming)
   setEditLearnTopic(currentUser?.LTopic)
   setEditLearnSubject(currentUser?.LSubject)
@@ -145,16 +145,16 @@ const handleUpdate = async () => {
           <div className='row1'>
             <div className='border'>
 
-          <TextField className='textmui' id="filled-basic" label="Filled" variant="filled" value={EditedName} onChange={(e) => setEditedName(e.target.value)}/>
+          <TextField className='textmui' id="filled-basic" label="Name" variant="filled" value={EditedName} onChange={(e) => setEditedName(e.target.value)}/>
             </div>
 
              
             <div className='user-email border' >
-            <TextField className='textmui' id="filled-basic" label="Filled" variant="filled" value={Email} />
+            <TextField className='textmui' id="filled-basic" label="Email" variant="filled" value={Email} />
 
             </div>
             <div className='user-dob border' >
-            <TextField className='textmui' id="filled-basic" label="Filled" variant="filled" value={Dob} />
+            <TextField className='textmui' id="filled-basic" label="YOB" variant="filled" value={Dob} />
 
             </div>
           </div>

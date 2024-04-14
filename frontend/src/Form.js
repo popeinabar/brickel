@@ -58,7 +58,7 @@ function Form() {
   const [Image, setImage] = useState("");
   const [DisplayImage, setDisplayImage] = useState("");
   const [error, setError] = useState(null);
-  console.log(error)
+
 
   const [isFormSubmitted, setIsFormSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);

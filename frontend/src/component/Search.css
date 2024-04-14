@@ -4,6 +4,9 @@
 .css-o69gx8-MuiCardMedia-root{
     width: 345px;
 }
+.css-1x1yfjw-MuiPaper-root-MuiCard-root{
+    max-width: 330px;
+}
 .mui-card-div{
     display: flex;
     flex-direction: column;
